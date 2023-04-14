@@ -1,6 +1,44 @@
-[gd_scene format=3 uid="uid://cj4efiv7nkd7w"]
+[gd_scene load_steps=2 format=3 uid="uid://cj4efiv7nkd7w"]
+
+[ext_resource type="Script" path="res://CardHand.gd" id="1_nsjva"]
 
 [node name="Node3D" type="Node3D"]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 size = Vector3(100, 0.1, 100)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CardHand" type="HBoxContainer" parent="Control"]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 460.0
+offset_right = 800.0
+offset_bottom = 640.0
+script = ExtResource("1_nsjva")
+
+[node name="Button" type="Button" parent="Control/CardHand"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button2" type="Button" parent="Control/CardHand"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button3" type="Button" parent="Control/CardHand"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button4" type="Button" parent="Control/CardHand"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.934447, 0.356102, 0, -0.356102, 0.934447, 0, 64.0547, 57.6936)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.965926, 0, 0.258819, -0.103606, 0.916384, 0.386661, -0.237178, -0.400301, 0.885159, 0, 70, -11)
