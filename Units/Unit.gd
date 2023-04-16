@@ -2,7 +2,8 @@
 # The board manages the Unit's position inside the game grid.
 # The unit itself is only a visual representation that moves smoothly in the game world.
 # We use the tool mode so the `skin` and `skin_offset` below update in the editor.
-
+# https://docs.godotengine.org/en/stable/tutorials/plugins/running_code_in_the_editor.html
+@tool
 class_name Unit
 extends Path2D
 
