@@ -1,38 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://cj4efiv7nkd7w"]
+[gd_scene load_steps=2 format=3 uid="uid://dbifk2llboa15"]
 
-[ext_resource type="Script" path="res://CardHand.gd" id="1_nsjva"]
-[ext_resource type="PackedScene" uid="uid://dbkicy0r886le" path="res://Card.tscn" id="2_kng04"]
+[ext_resource type="PackedScene" uid="uid://vokfoas7a3nt" path="res://UI/CardUI.tscn" id="1_olo4y"]
 
 [node name="Node3D" type="Node3D"]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 size = Vector3(100, 0.1, 100)
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="CardHand" type="HBoxContainer" parent="Control"]
-layout_mode = 0
-offset_left = 400.0
-offset_top = 460.0
-offset_right = 800.0
-offset_bottom = 640.0
-script = ExtResource("1_nsjva")
-
-[node name="Card" parent="Control/CardHand" instance=ExtResource("2_kng04")]
-layout_mode = 2
-
-[node name="Card2" parent="Control/CardHand" instance=ExtResource("2_kng04")]
-layout_mode = 2
-
-[node name="Card3" parent="Control/CardHand" instance=ExtResource("2_kng04")]
-layout_mode = 2
-
-[node name="Card4" parent="Control/CardHand" instance=ExtResource("2_kng04")]
-layout_mode = 2
+[node name="CardUI" parent="." instance=ExtResource("1_olo4y")]
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.934447, 0.356102, 0, -0.356102, 0.934447, 0, 64.0547, 57.6936)

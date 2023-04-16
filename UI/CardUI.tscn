@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://vokfoas7a3nt"]
+
+[ext_resource type="Script" path="res://UI/CardHand.gd" id="1_7fhvl"]
+[ext_resource type="PackedScene" uid="uid://dj1nmmgfqjrx2" path="res://UI/Card.tscn" id="2_yyfhi"]
+
+[node name="CardUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 400.0
+offset_right = 400.0
+offset_bottom = 180.0
+
+[node name="CardHand" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_top = 450.0
+offset_right = 400.0
+offset_bottom = 630.0
+script = ExtResource("1_7fhvl")
+
+[node name="Card" parent="CardHand" instance=ExtResource("2_yyfhi")]
+layout_mode = 2
+
+[node name="Card2" parent="CardHand" instance=ExtResource("2_yyfhi")]
+layout_mode = 2
+
+[node name="Card3" parent="CardHand" instance=ExtResource("2_yyfhi")]
+layout_mode = 2
+
+[node name="Card4" parent="CardHand" instance=ExtResource("2_yyfhi")]
+layout_mode = 2
