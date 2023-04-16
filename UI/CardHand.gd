@@ -22,3 +22,4 @@ func _process(delta):
 func _on_Card_Selected():
 	print("hello ", count)
 	count += 1
+	
