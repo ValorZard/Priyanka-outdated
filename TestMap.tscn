@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bygfg4g6qdj22"]
+
+[ext_resource type="PackedScene" uid="uid://b5k6gkhmffbyx" path="res://Background/Map.tscn" id="1_kvogq"]
+[ext_resource type="PackedScene" uid="uid://diihftjuyxvcb" path="res://Units/Unit.tscn" id="2_muf87"]
+
+[node name="TestMap" type="Node2D"]
+
+[node name="Map" parent="." instance=ExtResource("1_kvogq")]
+
+[node name="Unit" parent="." instance=ExtResource("2_muf87")]
