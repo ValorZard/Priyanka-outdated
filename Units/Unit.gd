@@ -8,7 +8,7 @@ class_name Unit
 extends Path2D
 
 # Preload the `Grid.tres` resource you created in the previous part.
-@export var grid: Resource = preload("res://Grid.tres")
+@export var grid: Resource = preload("res://GameBoard/Grid.tres")
 # Distance to which the unit can walk in cells.
 # We'll use this to limit the cells the unit can move to.
 @export var move_range := 6
