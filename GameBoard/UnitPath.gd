@@ -19,19 +19,38 @@ var current_path := PackedVector2Array()
 func initialize(walkable_cells: Array) -> void:
 	_pathfinder = PathFinder.new(grid, walkable_cells)
 
+func _ready() -> void:
+	# These two points define the start and the end of a rectangle of cells.
+	var rect_start := Vector2(4, 4)
+	var rect_end := Vector2(10, 8)
+
+	# The following lines generate an array of points filling the rectangle from rect_start to rect_end.
+	var points := []
+	# In a for loop, writing a number or expression that evaluates to a number after the "in" 
+	# keyword implicitly calls the range() function.
+	# For example, "for x in 3" is a shorthand for "for x in range(3)".
+	for x in rect_end.x - rect_start.x + 1:
+		for y in rect_end.y - rect_start.y + 1:
+			points.append(rect_start + Vector2(x, y))
+			print("setting up ", x, ", ", y)
+
+	# We can use the points to generate our PathFinder and draw a path.
+	initialize(points)
+	draw(rect_start, Vector2(8, 7))
 
 # Finds and draws the path between `cell_start` and `cell_end`.
-func draw(cell_start: Vector2, cell_end: Vector2) -> void:
+func draw(cell_start: Vector2i, cell_end: Vector2i) -> void:
 	# We first clear any tiles on the tilemap, then let the Astar2D (PathFinder) find the
 	# path for us.
 	clear()
 	current_path = _pathfinder.calculate_point_path(cell_start, cell_end)
 	# And we draw a tile for every cell in the path.
-	#for cell in current_path:
-	#	set_cellv(cell, 0)
+	for cell in current_path:
+		set_cell(0, cell)
+		print("current cell", cell)
 	# The function below updates the auto-tiling. Without it, you wouldn't get the nice path with curves
 	# and the arrows on either end.
-	#update_bitmask_region()
+	force_update()
 
 
 # Stops drawing, clearing the drawn path and the `_pathfinder`.
