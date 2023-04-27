@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkvx7v6lkshte"]
+
+[ext_resource type="PackedScene" uid="uid://dq2jwbaq3tav0" path="res://GameBoard/Cursor/Cursor.tscn" id="1_kguot"]
+[ext_resource type="PackedScene" uid="uid://b5k6gkhmffbyx" path="res://Background/Map.tscn" id="1_kvogq"]
+[ext_resource type="PackedScene" uid="uid://diihftjuyxvcb" path="res://Units/Unit.tscn" id="2_muf87"]
+
+[node name="TestMap" type="Node2D"]
+
+[node name="Cursor" parent="." instance=ExtResource("1_kguot")]
+position = Vector2(179.717, 158.583)
+
+[node name="Map" parent="." instance=ExtResource("1_kvogq")]
+
+[node name="Unit" parent="." instance=ExtResource("2_muf87")]
