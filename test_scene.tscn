@@ -4,13 +4,16 @@
 
 [node name="Node3D" type="Node3D"]
 
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.729661, 2)
+
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
-size = Vector3(100, 0.1, 100)
+size = Vector3(10, 0.1, 10)
 
 [node name="CardUI" parent="." instance=ExtResource("1_olo4y")]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.934447, 0.356102, 0, -0.356102, 0.934447, 0, 64.0547, 57.6936)
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 10, 10)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.965926, 0, 0.258819, -0.103606, 0.916384, 0.386661, -0.237178, -0.400301, 0.885159, 0, 70, -11)

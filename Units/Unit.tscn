@@ -1,63 +1,28 @@
-[gd_scene load_steps=7 format=3 uid="uid://diihftjuyxvcb"]
+[gd_scene load_steps=3 format=3 uid="uid://cv35p73n0mkdh"]
 
-[ext_resource type="Texture2D" uid="uid://dyqlmolxwctmu" path="res://Units/unit_shadow.svg" id="1_c6g5v"]
-[ext_resource type="Script" path="res://Units/Unit.gd" id="1_wu8tr"]
-[ext_resource type="Texture2D" uid="uid://r2vht3xjoid6" path="res://Units/squirrel.png" id="2_qosln"]
+[sub_resource type="GDScript" id="GDScript_5pcja"]
+script/source = "extends Node3D
 
-[sub_resource type="Animation" id="Animation_x4h7f"]
-resource_name = "idle"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PathFollow2D/Sprite:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
 
-[sub_resource type="Animation" id="Animation_mv4io"]
-resource_name = "selected"
-length = 1.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PathFollow2D/Sprite:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1.5, 1.5, 1.5, 1)]
-}
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_mam8d"]
-_data = {
-"idle": SubResource("Animation_x4h7f"),
-"selected": SubResource("Animation_mv4io")
-}
 
-[node name="Unit" type="Path2D"]
-script = ExtResource("1_wu8tr")
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
 
-[node name="PathFollow2D" type="PathFollow2D" parent="."]
-rotates = false
-loop = false
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oqlsk"]
+height = 2.75
 
-[node name="Shadow" type="Sprite2D" parent="PathFollow2D"]
-texture = ExtResource("1_c6g5v")
+[node name="Unit" type="Node3D"]
+script = SubResource("GDScript_5pcja")
 
-[node name="Sprite" type="Sprite2D" parent="PathFollow2D"]
-modulate = Color(1.5, 1.5, 1.5, 1)
-position = Vector2(2, 0)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_qosln")
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_mam8d")
-}
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = SubResource("CapsuleShape3D_oqlsk")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
