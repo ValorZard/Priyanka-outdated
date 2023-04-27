@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbifk2llboa15"]
+
+[ext_resource type="Script" path="res://GameBoard/GameBoard.gd" id="1_lty5j"]
+[ext_resource type="PackedScene" uid="uid://vokfoas7a3nt" path="res://UI/CardUI.tscn" id="2_g2jvq"]
+[ext_resource type="PackedScene" uid="uid://cv35p73n0mkdh" path="res://Units/Unit.tscn" id="3_dmna3"]
+[ext_resource type="PackedScene" uid="uid://cmy4ycwq53ul2" path="res://Prototyping/Box.tscn" id="4_t58ag"]
+
+[node name="GameBoard" type="Node3D"]
+script = ExtResource("1_lty5j")
+
+[node name="CardUI" parent="." instance=ExtResource("2_g2jvq")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.642788, 0.766044, 0, -0.766044, 0.642788, 0, 20, 10)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.965926, 0, 0.258819, -0.103606, 0.916384, 0.386661, -0.237178, -0.400301, 0.885159, 0, 70, -11)
+
+[node name="CharacterUnit" parent="." instance=ExtResource("3_dmna3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -2)
+
+[node name="Box" parent="." instance=ExtResource("4_t58ag")]
+transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, -20)
