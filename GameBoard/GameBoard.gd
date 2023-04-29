@@ -4,7 +4,7 @@ extends Node3D
 const RAY_LENGTH = 1000.0
 
 var mouse_button_clicked : bool = false
-var current_cursor_position : Vector3 = Vector3.ZERO
+var move_to_position : Vector3 = Vector3.ZERO
 @export var character_movement_speed : float = 7.5
 @export var character_ui_circle_width : float = 1
 
@@ -29,18 +29,18 @@ func render_placement_line(cursor_position : Vector3):
 	$BoxLine.rotation.y = $CharacterUnit.position.angle_to(cursor_position)
 
 # generate UI Circle around the player to show maximum distance it can go
-func render_character_ui_circle(cursor_position : Vector3):
+func render_character_ui_circle(distance_to_cursor : float):
 	$CharacterUICircle.position = $CharacterUnit.position
-	$CharacterUICircle.inner_radius = ($CharacterUnit.position - cursor_position).length()
+	$CharacterUICircle.inner_radius = distance_to_cursor
 	# add a bit of a buffer to the outer radius so it isn't messed up
-	$CharacterUICircle.outer_radius = ($CharacterUnit.position - cursor_position).length() + character_ui_circle_width 
+	$CharacterUICircle.outer_radius = distance_to_cursor + character_ui_circle_width 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	# code taken from https://docs.godotengine.org/en/stable/tutorials/physics/ray-casting.html
 	# generate the raycast starting and ending points
 	# we want to generate one every frame for UI purposes
-	var camera3d = $Camera3D
+	var camera3d := $Camera3D
 	var from = camera3d.project_ray_origin(get_viewport().get_mouse_position())
 	var to = from + camera3d.project_ray_normal(get_viewport().get_mouse_position()) * RAY_LENGTH
 	# actually create the raycast and check for overlaps with the gameboard to know where to locate the cursor
@@ -50,10 +50,15 @@ func _physics_process(delta):
 	# can only actually change the cursor position if the raycast collision with the gameboard exists
 	if result:
 		$Cursor.position = result["position"]
-		# only want to actually set the cursor position on click
+		var direction_to_cursor : Vector3 = ($Cursor.position - $CharacterUnit.position).normalized()
+		var distance_to_cursor : float = ($Cursor.position - $CharacterUnit.position).length()
+		# don't allow the character unit to move more than it's max movement radius
+		if (distance_to_cursor > $CharacterUnit.MAX_MOVEMENT_RADIUS):
+			distance_to_cursor = $CharacterUnit.MAX_MOVEMENT_RADIUS
+		# only want to actually set the position we want the unit to move to on click
 		if Input.is_action_just_released("left_mouse_click"):
-			current_cursor_position = $Cursor.position
+			move_to_position = $CharacterUnit.position + (direction_to_cursor * distance_to_cursor)
 		#render_placement_line($Cursor.position)
-		render_character_ui_circle($Cursor.position)
-	if current_cursor_position != Vector3.ZERO:
-		$CharacterUnit.position = $CharacterUnit.position.move_toward(current_cursor_position, character_movement_speed * delta)
+		render_character_ui_circle(distance_to_cursor)
+	if move_to_position != Vector3.ZERO:
+		$CharacterUnit.position = $CharacterUnit.position.move_toward(move_to_position, character_movement_speed * delta)
