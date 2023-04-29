@@ -5,7 +5,8 @@ const RAY_LENGTH = 1000.0
 
 var mouse_button_clicked : bool = false
 var current_cursor_position : Vector3 = Vector3.ZERO
-var character_movement_speed : float = 7.5
+@export var character_movement_speed : float = 7.5
+@export var character_ui_circle_width : float = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,6 +21,20 @@ func _input(event):
 		#print("Mouse Motion at: ", event.position)
 		pass
 
+# generate "line" between cursor and player for UI purposes
+# NOTE: Doesn't currently work properly, rotation is a bit jank
+func render_placement_line(cursor_position : Vector3):
+	$BoxLine.position = ($CharacterUnit.position + cursor_position) / 2
+	$BoxLine.width = ($CharacterUnit.position - cursor_position).length()
+	$BoxLine.rotation.y = $CharacterUnit.position.angle_to(cursor_position)
+
+# generate UI Circle around the player to show maximum distance it can go
+func render_character_ui_circle(cursor_position : Vector3):
+	$CharacterUICircle.position = $CharacterUnit.position
+	$CharacterUICircle.inner_radius = ($CharacterUnit.position - cursor_position).length()
+	# add a bit of a buffer to the outer radius so it isn't messed up
+	$CharacterUICircle.outer_radius = ($CharacterUnit.position - cursor_position).length() + character_ui_circle_width 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	# code taken from https://docs.godotengine.org/en/stable/tutorials/physics/ray-casting.html
@@ -28,7 +43,7 @@ func _physics_process(delta):
 	var camera3d = $Camera3D
 	var from = camera3d.project_ray_origin(get_viewport().get_mouse_position())
 	var to = from + camera3d.project_ray_normal(get_viewport().get_mouse_position()) * RAY_LENGTH
-	# actually create the raycast and check for overlaps
+	# actually create the raycast and check for overlaps with the gameboard to know where to locate the cursor
 	var space_state = get_world_3d().direct_space_state
 	var query = PhysicsRayQueryParameters3D.create(from, to)
 	var result : Dictionary = space_state.intersect_ray(query)
@@ -37,11 +52,8 @@ func _physics_process(delta):
 		$Cursor.position = result["position"]
 		# only want to actually set the cursor position on click
 		if Input.is_action_just_released("left_mouse_click"):
-			current_cursor_position = result["position"]
-		# generate "line" between cursor and player for UI purposes
-		$BoxLine.position = ($CharacterUnit.position + result["position"]) / 2
-		$BoxLine.width = ($CharacterUnit.position - result["position"]).length()
-		$BoxLine.rotation.y = $CharacterUnit.position.angle_to(result["position"])
-	
+			current_cursor_position = $Cursor.position
+		#render_placement_line($Cursor.position)
+		render_character_ui_circle($Cursor.position)
 	if current_cursor_position != Vector3.ZERO:
 		$CharacterUnit.position = $CharacterUnit.position.move_toward(current_cursor_position, character_movement_speed * delta)

@@ -33,3 +33,5 @@ script = ExtResource("5_64lmv")
 
 [node name="BoxLine" type="CSGBox3D" parent="."]
 material = SubResource("StandardMaterial3D_pp4sk")
+
+[node name="CharacterUICircle" type="CSGTorus3D" parent="."]
