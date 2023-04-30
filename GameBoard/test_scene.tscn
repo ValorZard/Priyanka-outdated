@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cttrmrpru8dsm"]
+[gd_scene load_steps=11 format=3 uid="uid://cttrmrpru8dsm"]
 
 [ext_resource type="Script" path="res://GameBoard/GameBoard.gd" id="1_lty5j"]
 [ext_resource type="PackedScene" uid="uid://vokfoas7a3nt" path="res://UI/CardUI.tscn" id="2_g2jvq"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://GameBoard/Cursor.gd" id="5_64lmv"]
 [ext_resource type="PackedScene" uid="uid://ouuora8lxpt7" path="res://Units/EnemyUnit.tscn" id="7_7icr8"]
 [ext_resource type="Script" path="res://GameBoard/EncounterData.gd" id="8_bkwkq"]
+[ext_resource type="Script" path="res://Commands/MovementCommand.gd" id="9_qknox"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pp4sk"]
 albedo_color = Color(0.615686, 0.866667, 0, 1)
@@ -43,3 +44,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4435, 0.5, -14.7083)
 
 [node name="EncounterData" type="Node" parent="."]
 script = ExtResource("8_bkwkq")
+
+[node name="Actions" type="Node" parent="."]
+
+[node name="MovementCommand" type="Node" parent="Actions"]
+script = ExtResource("9_qknox")

@@ -8,6 +8,11 @@ const MAX_MOVEMENT_RADIUS = 10
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+# character data
+
+# animation data
+var old_visual_position : Vector3 # stores the old position of the character unit model
+
 func change_position(move_to_position : Vector3, delta):
 	self.position = self.position.move_toward(move_to_position, character_movement_speed * delta)
 
