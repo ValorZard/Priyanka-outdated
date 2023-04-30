@@ -1,7 +1,7 @@
 extends Node3D
 
 # GameBoard: only handles input from player
-# EncounterData: handles all the meta data for the combat encounter (turn order, initiative, all that good stuff)
+# CombatManager: handles all the meta data for the combat encounter (turn order, initiative, all that good stuff)
 # CharacterUnit should only handle data relevant to that unit plus animation maybe
 
 var mouse_button_clicked : bool = false
