@@ -10,6 +10,8 @@ var mouse_button_clicked : bool = false
 # visual data
 @export var character_ui_circle_width : float = 1
 
+var command_array : Array
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -43,6 +45,12 @@ func _physics_process(delta):
 	$Cursor.update_cursor($Camera3D, $CharacterUnit)
 	# only want to actually set the position we want the unit to move to on click
 	if Input.is_action_just_released("left_mouse_click"):
-		$Actions/MovementCommand.execute($CharacterUnit, $Cursor.direction_to_cursor, $Cursor.distance_to_cursor)
-		#render_placement_line($Cursor.position)
-		render_character_ui_circle($CharacterUnit.MAX_MOVEMENT_RADIUS)
+		var movement_command := MovementCommand.new($CharacterUnit, $Cursor.direction_to_cursor, $Cursor.distance_to_cursor)
+		movement_command.execute()
+		command_array.push_back(movement_command)
+	if Input.is_action_just_pressed("undo_debug"):
+		if !command_array.is_empty():
+			command_array.pop_front().undo()
+	# render UI stuff
+	#render_placement_line($Cursor.position)
+	render_character_ui_circle($CharacterUnit.MAX_MOVEMENT_RADIUS)

@@ -1,7 +1,18 @@
-extends Node
+extends Command
 
-func execute(character_unit : CharacterUnit, movement_direction : Vector3, movement_distance : float):
-	# don't allow character to move more than max movement radius
-	if(movement_distance > character_unit.MAX_MOVEMENT_RADIUS):
-		movement_distance = character_unit.MAX_MOVEMENT_RADIUS
-	character_unit.position += movement_direction * movement_distance
+class_name MovementCommand
+
+var movement_direction : Vector3
+var movement_distance : float 
+
+func _init(battler: BaseUnit, movement_direction : Vector3, movement_distance : float):
+	current_unit = battler
+	initialized = true
+	self.movement_direction = movement_direction
+	self.movement_distance = movement_distance
+
+func execute():
+	current_unit.change_position(self.movement_direction, self.movement_distance)
+
+func undo():
+	current_unit.change_position(-self.movement_direction, self.movement_distance)

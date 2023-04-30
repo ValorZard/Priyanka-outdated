@@ -1,5 +1,13 @@
-extends BaseUnit
+extends CharacterBody3D
 
+# all other unit classes, both character and enemy units, all inherit from Base Unit
+class_name BaseUnit 
+
+const JUMP_VELOCITY = 4.5
+const MAX_MOVEMENT_RADIUS = 10
+@export var movement_speed : float = 7.5
+# Get the gravity from the project settings to be synced with RigidBody nodes.
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _physics_process(delta):
 	# Add the gravity.
