@@ -14,5 +14,5 @@ script = ExtResource("1_w7xdm")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_oqlsk")
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+[node name="CharacterModel" type="CSGCylinder3D" parent="."]
 material = SubResource("StandardMaterial3D_vrxfe")

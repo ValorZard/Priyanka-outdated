@@ -1,11 +1,14 @@
 extends Node3D
 
-
+# GameBoard: only handles input from player
+# EncounterData: handles all the meta data for the combat encounter (turn order, initiative, all that good stuff)
+# CharacterUnit should only handle data relevant to that unit plus animation maybe
 const RAY_LENGTH = 1000.0
 
 var mouse_button_clicked : bool = false
+# actual data
 var move_to_position : Vector3 = Vector3.ZERO
-@export var character_movement_speed : float = 7.5
+# visual data
 @export var character_ui_circle_width : float = 1
 
 # Called when the node enters the scene tree for the first time.
@@ -61,4 +64,4 @@ func _physics_process(delta):
 		#render_placement_line($Cursor.position)
 		render_character_ui_circle(distance_to_cursor)
 	if move_to_position != Vector3.ZERO:
-		$CharacterUnit.position = $CharacterUnit.position.move_toward(move_to_position, character_movement_speed * delta)
+		$CharacterUnit.change_position(move_to_position, delta)
