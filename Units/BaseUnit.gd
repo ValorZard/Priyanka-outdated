@@ -11,6 +11,12 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @export var health : int = 10
 @export var movement_speed : float = 7.5
 @export var max_movement_radius : float = 10 # maximum distance this unit can move in one turn in meters
+var attack_area : AttackArea = preload("res://Attacks/AttackArea.tscn").instantiate()
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	attack_area = preload("res://Attacks/AttackArea.tscn").instantiate()
+	add_child(attack_area)
 
 # note for future self, should figure out how to change this either move_and_slide or move_and_collide
 # that way I can take advantage of Godot's in engine physics stuff and not run into any weird bugs

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://081eyyekaqwa"]
+
+[ext_resource type="Script" path="res://Attacks/AttackArea.gd" id="1_kfk1h"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5ahon"]
+radius = 10.0
+
+[node name="AttackArea" type="Area3D"]
+script = ExtResource("1_kfk1h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_5ahon")

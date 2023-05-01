@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://GameBoard/GameBoard.gd" id="1_lty5j"]
 [ext_resource type="PackedScene" uid="uid://vokfoas7a3nt" path="res://UI/CardUI.tscn" id="2_g2jvq"]
-[ext_resource type="PackedScene" uid="uid://ddr708ysituym" path="res://Units/CharacterUnit.tscn" id="3_dmna3"]
+[ext_resource type="PackedScene" uid="uid://ywdc7yprfld7" path="res://Units/CharacterUnit.tscn" id="3_dmna3"]
 [ext_resource type="PackedScene" uid="uid://cmy4ycwq53ul2" path="res://Prototyping/Box.tscn" id="4_t58ag"]
 [ext_resource type="Texture2D" uid="uid://dhjqljog8gjbn" path="res://icon.svg" id="5_7oytf"]
 [ext_resource type="Script" path="res://GameBoard/Cursor.gd" id="5_64lmv"]
@@ -43,3 +43,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4435, 0.5, -14.7083)
 
 [node name="CombatManager" type="Node" parent="."]
 script = ExtResource("8_quw6g")
+
+[node name="EnemyUnit2" parent="." instance=ExtResource("7_7icr8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.4451, 0.5, -28.6717)
+
+[node name="EnemyUnit3" parent="." instance=ExtResource("7_7icr8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.23204, 0.5, -37.2569)
+
+[node name="EnemyUnit4" parent="." instance=ExtResource("7_7icr8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.05293, 0.5, -22.0237)

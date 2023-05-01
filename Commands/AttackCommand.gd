@@ -12,6 +12,7 @@ func _init(current_unit: BaseUnit, target: BaseUnit, damage_dealt):
 	self.damage_dealt = damage_dealt
 
 func execute():
+	target = current_unit.attack_area.get_nearest_unit()
 	target.take_damage(damage_dealt)
 	print("execute! damage_dealt: ", damage_dealt, ", target health now: ", target.health)
 
