@@ -14,7 +14,9 @@ func _init(current_unit: BaseUnit, movement_direction : Vector3, movement_distan
 func execute():
 	current_unit.change_position(self.movement_direction, self.movement_distance)
 	print("execute! direction: ", self.movement_direction, ", distance: ", self.movement_distance)
+	return true
 
 func undo():
 	current_unit.change_position(-self.movement_direction, self.movement_distance)
 	print("execute! undo: ", self.movement_direction, ", distance: ", self.movement_distance)
+	return true

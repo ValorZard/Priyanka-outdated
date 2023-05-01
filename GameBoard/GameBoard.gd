@@ -49,8 +49,9 @@ func undo_command():
 func do_attack():
 	if $CharacterUnit.can_attack():
 		var attack_command := AttackCommand.new($CharacterUnit, $EnemyUnit, 1)
-		attack_command.execute()
-		command_array.push_back(attack_command)
+		if attack_command.execute():
+			command_array.push_back(attack_command)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	# update cursor data so we can use it for movement purposes
@@ -59,14 +60,14 @@ func _physics_process(delta):
 	if Input.is_action_just_released("left_mouse_click") and $UIManager.cursor_can_click():
 		var movement_command := MovementCommand.new($CharacterUnit, 
 			$UIManager.cursor.direction_to_cursor, $UIManager.cursor.distance_to_cursor)
-		movement_command.execute()
-		command_array.push_back(movement_command)
+		if movement_command.execute():
+			command_array.push_back(movement_command)
 #	if Input.is_action_just_released("attack_debug"):
 #		var attack_command := AttackCommand.new($CharacterUnit, $EnemyUnit, 1)
 #		attack_command.execute()
 #		command_array.push_back(attack_command)
-	if Input.is_action_just_pressed("undo_debug"):
-		undo_command()
+#	if Input.is_action_just_pressed("undo_debug"):
+#		undo_command()
 	# render UI stuff
 	#render_placement_line($Cursor.position)
 	render_character_ui_circle($CharacterUnit.max_movement_radius)

@@ -15,12 +15,12 @@ func _init(current_unit: BaseUnit):
 	initialized = true
 
 
-func execute():
+func execute() -> bool:
 	assert(initialized)
 	print("%s missing overwrite of the execute method" % name)
 	return false
 
-func undo():
+func undo() -> bool:
 	assert(initialized)
 	print("%s missing overwrite of the undo method" % name)
 	return false

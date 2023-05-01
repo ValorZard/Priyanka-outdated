@@ -30,7 +30,9 @@ func get_nearest_unit() -> BaseUnit:
 	var closest_enemy_unit : BaseUnit = array_of_possible_units_to_attack[0]
 	for unit in array_of_possible_units_to_attack:
 		if (unit.position - owner_unit.position).length() < (closest_enemy_unit.position - owner_unit.position).length():
-			closest_enemy_unit = unit
+			# probably don't want to keep killing an enemy thats already dead
+			if !unit.is_dead():
+				closest_enemy_unit = unit
 	return closest_enemy_unit
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
