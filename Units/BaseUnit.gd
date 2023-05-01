@@ -43,6 +43,11 @@ func heal_health(healed_amt : int):
 	else:
 		self.health += healed_amt
 
+func can_attack() -> bool:
+	if attack_area.array_of_possible_units_to_attack.size() <= 0:
+		return false
+	return true
+
 func is_dead():
 	return self.health <= 0
 

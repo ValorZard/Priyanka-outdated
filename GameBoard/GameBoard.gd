@@ -47,9 +47,10 @@ func undo_command():
 		command_array.pop_back().undo()
 
 func do_attack():
-	var attack_command := AttackCommand.new($CharacterUnit, $EnemyUnit, 1)
-	attack_command.execute()
-	command_array.push_back(attack_command)
+	if $CharacterUnit.can_attack():
+		var attack_command := AttackCommand.new($CharacterUnit, $EnemyUnit, 1)
+		attack_command.execute()
+		command_array.push_back(attack_command)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	# update cursor data so we can use it for movement purposes

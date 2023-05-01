@@ -9,7 +9,7 @@ func _ready():
 	cursor = $Cursor
 	$AttackButton.connect("button_up", game_board.do_attack)
 
-# if the cursor is currently over a button or other UI element, don't allow it to click to move the unti
+# if the cursor is currently over a button or other UI element, don't allow it to click to move the unit
 func cursor_can_click() -> bool:
 	if $AttackButton.is_hovered():
 		return false
