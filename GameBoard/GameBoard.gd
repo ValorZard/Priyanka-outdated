@@ -39,6 +39,11 @@ func render_character_ui_circle(distance_to_cursor : float):
 	# add a bit of a buffer to the outer radius so it isn't messed up
 	$CharacterUICircle.outer_radius = distance_to_cursor + character_ui_circle_width 
 
+# logic functions
+func undo_command():
+	if !command_array.is_empty():
+		command_array.pop_back().undo()
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	# update cursor data so we can use it for movement purposes
@@ -49,8 +54,7 @@ func _physics_process(delta):
 		movement_command.execute()
 		command_array.push_back(movement_command)
 	if Input.is_action_just_pressed("undo_debug"):
-		if !command_array.is_empty():
-			command_array.pop_back().undo()
+		undo_command()
 	# render UI stuff
 	#render_placement_line($Cursor.position)
 	render_character_ui_circle($CharacterUnit.MAX_MOVEMENT_RADIUS)

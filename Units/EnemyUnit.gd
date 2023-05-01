@@ -1,5 +1,6 @@
 extends BaseUnit
 
+class_name EnemyUnit
 
 func _physics_process(delta):
 	# Add the gravity.
