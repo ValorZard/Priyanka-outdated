@@ -1,12 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://cnwcvn25f0evb"]
+[gd_scene load_steps=10 format=3 uid="uid://b8e2oiqmnr637"]
 
 [ext_resource type="Script" path="res://GameBoard/GameBoard.gd" id="1_lty5j"]
-[ext_resource type="PackedScene" uid="uid://vokfoas7a3nt" path="res://UI/CardUI.tscn" id="2_g2jvq"]
 [ext_resource type="PackedScene" uid="uid://ywdc7yprfld7" path="res://Units/CharacterUnit.tscn" id="3_dmna3"]
 [ext_resource type="PackedScene" uid="uid://cmy4ycwq53ul2" path="res://Prototyping/Box.tscn" id="4_t58ag"]
 [ext_resource type="Texture2D" uid="uid://dhjqljog8gjbn" path="res://icon.svg" id="5_7oytf"]
 [ext_resource type="Script" path="res://GameBoard/Cursor.gd" id="5_64lmv"]
 [ext_resource type="PackedScene" uid="uid://ouuora8lxpt7" path="res://Units/EnemyUnit.tscn" id="7_7icr8"]
+[ext_resource type="Script" path="res://UI/UIManager.gd" id="8_2vnjj"]
 [ext_resource type="Script" path="res://GameBoard/CombatManager.gd" id="8_quw6g"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pp4sk"]
@@ -15,10 +15,32 @@ albedo_color = Color(0.615686, 0.866667, 0, 1)
 [node name="GameBoard" type="Node3D"]
 script = ExtResource("1_lty5j")
 
-[node name="CardUI" parent="." instance=ExtResource("2_g2jvq")]
-
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.642788, 0.766044, 0, -0.766044, 0.642788, 0, 20, 10)
+
+[node name="UIManager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("8_2vnjj")
+
+[node name="Cursor" type="Sprite3D" parent="UIManager"]
+texture = ExtResource("5_7oytf")
+script = ExtResource("5_64lmv")
+
+[node name="AttackButton" type="Button" parent="UIManager"]
+offset_left = 58.0
+offset_top = 540.0
+offset_right = 259.0
+offset_bottom = 600.0
+text = "Attack
+"
+
+[node name="Label" type="Label" parent="UIManager"]
+layout_mode = 0
+offset_left = 435.0
+offset_top = 503.0
+offset_right = 877.0
+offset_bottom = 624.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.965926, 0, 0.258819, -0.103606, 0.916384, 0.386661, -0.237178, -0.400301, 0.885159, 0, 70, -11)
@@ -28,10 +50,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -2)
 
 [node name="Box" parent="." instance=ExtResource("4_t58ag")]
 transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, -20)
-
-[node name="Cursor" type="Sprite3D" parent="."]
-texture = ExtResource("5_7oytf")
-script = ExtResource("5_64lmv")
 
 [node name="BoxLine" type="CSGBox3D" parent="."]
 material = SubResource("StandardMaterial3D_pp4sk")

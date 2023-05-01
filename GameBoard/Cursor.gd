@@ -1,5 +1,7 @@
 extends Sprite3D
 
+class_name Cursor
+
 # data variables
 var direction_to_cursor : Vector3
 var distance_to_cursor : float

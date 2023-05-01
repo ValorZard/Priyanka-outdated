@@ -1,5 +1,7 @@
 extends Node3D
 
+class_name GameBoard
+
 # GameBoard: only handles input from player
 # CombatManager: handles all the meta data for the combat encounter (turn order, initiative, all that good stuff)
 # CharacterUnit should only handle data relevant to that unit plus animation maybe
@@ -44,19 +46,24 @@ func undo_command():
 	if !command_array.is_empty():
 		command_array.pop_back().undo()
 
+func do_attack():
+	var attack_command := AttackCommand.new($CharacterUnit, $EnemyUnit, 1)
+	attack_command.execute()
+	command_array.push_back(attack_command)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	# update cursor data so we can use it for movement purposes
-	$Cursor.update_cursor($Camera3D, $CharacterUnit)
+	$UIManager.cursor.update_cursor($Camera3D, $CharacterUnit)
 	# only want to actually set the position we want the unit to move to on click
-	if Input.is_action_just_released("left_mouse_click"):
-		var movement_command := MovementCommand.new($CharacterUnit, $Cursor.direction_to_cursor, $Cursor.distance_to_cursor)
+	if Input.is_action_just_released("left_mouse_click") and $UIManager.cursor_can_click():
+		var movement_command := MovementCommand.new($CharacterUnit, 
+			$UIManager.cursor.direction_to_cursor, $UIManager.cursor.distance_to_cursor)
 		movement_command.execute()
 		command_array.push_back(movement_command)
-	if Input.is_action_just_released("attack_debug"):
-		var attack_command := AttackCommand.new($CharacterUnit, $EnemyUnit, 1)
-		attack_command.execute()
-		command_array.push_back(attack_command)
+#	if Input.is_action_just_released("attack_debug"):
+#		var attack_command := AttackCommand.new($CharacterUnit, $EnemyUnit, 1)
+#		attack_command.execute()
+#		command_array.push_back(attack_command)
 	if Input.is_action_just_pressed("undo_debug"):
 		undo_command()
 	# render UI stuff
