@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://ouuora8lxpt7"]
+
+[ext_resource type="Script" path="res://Units/EnemyUnit.gd" id="1_uwswa"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0h3wa"]
+height = 2.75
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_et1ok"]
+albedo_color = Color(0.933333, 0.0666667, 0.219608, 1)
+
+[node name="EnemyUnit" type="CharacterBody3D"]
+script = ExtResource("1_uwswa")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_0h3wa")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+material = SubResource("StandardMaterial3D_et1ok")
