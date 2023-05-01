@@ -50,7 +50,7 @@ func _physics_process(delta):
 		command_array.push_back(movement_command)
 	if Input.is_action_just_pressed("undo_debug"):
 		if !command_array.is_empty():
-			command_array.pop_front().undo()
+			command_array.pop_back().undo()
 	# render UI stuff
 	#render_placement_line($Cursor.position)
 	render_character_ui_circle($CharacterUnit.MAX_MOVEMENT_RADIUS)
