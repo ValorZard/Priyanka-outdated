@@ -2,14 +2,6 @@ extends BaseUnit
 
 class_name CharacterUnit
 
-# note for future self, should figure out how to change this either move_and_slide or move_and_collide
-# that way I can take advantage of Godot's in engine physics stuff and not run into any weird bugs
-func change_position(movement_direction : Vector3, movement_distance : float):
-	# don't allow character to move more than max movement radius
-	if(movement_distance > self.MAX_MOVEMENT_RADIUS):
-		movement_distance = self.MAX_MOVEMENT_RADIUS
-	self.position += movement_direction * movement_distance
-
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():

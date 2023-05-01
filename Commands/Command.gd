@@ -10,8 +10,8 @@ var initialized = false
 @export var description: String = "Base command"
 
 
-func _init(battler: BaseUnit):
-	current_unit = battler
+func _init(current_unit: BaseUnit):
+	self.current_unit = current_unit
 	initialized = true
 
 

@@ -53,8 +53,12 @@ func _physics_process(delta):
 		var movement_command := MovementCommand.new($CharacterUnit, $Cursor.direction_to_cursor, $Cursor.distance_to_cursor)
 		movement_command.execute()
 		command_array.push_back(movement_command)
+	if Input.is_action_just_released("attack_debug"):
+		var attack_command := AttackCommand.new($CharacterUnit, $EnemyUnit, 1)
+		attack_command.execute()
+		command_array.push_back(attack_command)
 	if Input.is_action_just_pressed("undo_debug"):
 		undo_command()
 	# render UI stuff
 	#render_placement_line($Cursor.position)
-	render_character_ui_circle($CharacterUnit.MAX_MOVEMENT_RADIUS)
+	render_character_ui_circle($CharacterUnit.max_movement_radius)
