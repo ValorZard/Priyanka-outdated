@@ -11,12 +11,15 @@ var mouse_button_clicked : bool = false
 #var move_to_position : Vector3 = Vector3.ZERO
 # visual data
 @export var character_ui_circle_width : float = 1
+var ui_manager : UIManager
 
 var command_array : Array
+var current_unit : BaseUnit
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	current_unit = $CharacterUnit
+	ui_manager = $UIManager
 
 func _input(event):
 	# Mouse in viewport coordinates.
@@ -36,10 +39,13 @@ func _input(event):
 
 # generate UI Circle around the player to show maximum distance it can go
 func render_character_ui_circle(distance_to_cursor : float):
-	$CharacterUICircle.position = $CharacterUnit.position
+	$CharacterUICircle.position = current_unit.position
 	$CharacterUICircle.inner_radius = distance_to_cursor
 	# add a bit of a buffer to the outer radius so it isn't messed up
 	$CharacterUICircle.outer_radius = distance_to_cursor + character_ui_circle_width 
+
+func log_event(message : String):
+	ui_manager.print_message(message)
 
 # logic functions
 func undo_command():
@@ -48,18 +54,18 @@ func undo_command():
 
 func do_attack():
 	if $CharacterUnit.can_attack():
-		var attack_command := AttackCommand.new($CharacterUnit, $EnemyUnit, 1)
+		var attack_command := AttackCommand.new(self, $EnemyUnit, 1)
 		if attack_command.execute():
 			command_array.push_back(attack_command)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	# update cursor data so we can use it for movement purposes
-	$UIManager.cursor.update_cursor($Camera3D, $CharacterUnit)
+	$UIManager.cursor.update_cursor($Camera3D, current_unit)
 	# only want to actually set the position we want the unit to move to on click
-	if Input.is_action_just_released("left_mouse_click") and $UIManager.cursor_can_click():
-		var movement_command := MovementCommand.new($CharacterUnit, 
-			$UIManager.cursor.direction_to_cursor, $UIManager.cursor.distance_to_cursor)
+	if Input.is_action_just_released("left_mouse_click") and ui_manager.cursor_can_click():
+		var movement_command := MovementCommand.new(self, 
+			$UIManager.cursor.direction_to_cursor, ui_manager.cursor.distance_to_cursor)
 		if movement_command.execute():
 			command_array.push_back(movement_command)
 #	if Input.is_action_just_released("attack_debug"):
@@ -70,4 +76,4 @@ func _physics_process(delta):
 #		undo_command()
 	# render UI stuff
 	#render_placement_line($Cursor.position)
-	render_character_ui_circle($CharacterUnit.max_movement_radius)
+	render_character_ui_circle(current_unit.max_movement_radius)

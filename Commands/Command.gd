@@ -4,15 +4,18 @@ class_name Command
 
 var initialized = false
 
-
-@onready var current_unit: BaseUnit = get_parent().get_owner()
+var game_board : GameBoard
+var current_unit: BaseUnit
 
 @export var description: String = "Base command"
 
-
-func _init(current_unit: BaseUnit):
-	self.current_unit = current_unit
+func initialize(game_board : GameBoard):
+	self.game_board = game_board
+	self.current_unit = game_board.current_unit
 	initialized = true
+
+func _init(game_board : GameBoard):
+	initialize(game_board)
 
 
 func execute() -> bool:

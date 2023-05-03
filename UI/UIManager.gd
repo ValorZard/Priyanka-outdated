@@ -1,5 +1,7 @@
 extends Control
 
+class_name UIManager
+
 var game_board : GameBoard
 var cursor : Cursor
 
@@ -15,6 +17,9 @@ func cursor_can_click() -> bool:
 	if $AttackButton.is_hovered() or $UndoButton.is_hovered():
 		return false
 	return true
+
+func print_message(message : String):
+	$Label.text = message
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
