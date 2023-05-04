@@ -1,6 +1,6 @@
 extends BaseUnit
 
-class_name CharacterUnit
+class_name PlayerUnit
 
 func _physics_process(delta):
 	# Add the gravity.

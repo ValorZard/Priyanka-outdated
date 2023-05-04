@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://ddr708ysituym"]
+[gd_scene load_steps=4 format=3 uid="uid://dfadgaktnm624"]
 
-[ext_resource type="Script" path="res://Units/CharacterUnit.gd" id="1_w7xdm"]
+[ext_resource type="Script" path="res://Units/PlayerUnit.gd" id="1_l4aah"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oqlsk"]
 height = 2.75
@@ -8,8 +8,8 @@ height = 2.75
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vrxfe"]
 albedo_color = Color(0.321569, 0.439216, 1, 1)
 
-[node name="CharacterUnit" type="CharacterBody3D"]
-script = ExtResource("1_w7xdm")
+[node name="PlayerUnit" type="CharacterBody3D"]
+script = ExtResource("1_l4aah")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_oqlsk")

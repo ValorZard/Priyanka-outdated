@@ -14,7 +14,7 @@ func _ready():
 	pass # Replace with function body.
 
 # update cursor data so we can use it for movement purposes
-func update_cursor(camera3d : Camera3D, current_character_unit : CharacterUnit):
+func update_cursor(camera3d : Camera3D, current_player_unit : PlayerUnit):
 	# code taken from https://docs.godotengine.org/en/stable/tutorials/physics/ray-casting.html
 	# generate the raycast starting and ending points
 	# we want to generate one every frame for UI purposes
@@ -28,8 +28,8 @@ func update_cursor(camera3d : Camera3D, current_character_unit : CharacterUnit):
 	if result:
 		self.position = result["position"]
 		# figure out distance and direction from current character unit TO cursor
-		self.direction_to_cursor = (self.position - current_character_unit.position).normalized()
-		self.distance_to_cursor = (self.position - current_character_unit.position).length()
+		self.direction_to_cursor = (self.position - current_player_unit.position).normalized()
+		self.distance_to_cursor = (self.position - current_player_unit.position).length()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

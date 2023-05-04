@@ -18,10 +18,10 @@ func execute():
 		target.take_damage(damage_dealt)
 	else:
 		return false
-	game_board.log_event(str("execute! damage_dealt: ", damage_dealt, ", target health now: ", target.health))
+	game_board.log_event(str("execute! ", target.name, " damage_dealt: ", damage_dealt, ", target health now: ", target.health))
 	return true
 
 func undo():
 	target.heal_health(damage_dealt)
-	game_board.log_event(str("undo! healed amount: ", damage_dealt, ", target health now: ", target.health))
+	game_board.log_event(str("undo! " , target.name, " healed amount: ", damage_dealt, ", target health now: ", target.health))
 	return true
