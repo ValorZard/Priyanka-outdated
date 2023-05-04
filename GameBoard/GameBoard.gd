@@ -65,15 +65,10 @@ func do_movement(direction : Vector3, distance : float):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	# GAME LOOP -> update every single unit in the field, and let the player control the player units
 	# update cursor data so we can use it for movement purposes
 	ui_manager.cursor.update_cursor($Camera3D, current_unit)
 	ui_manager.get_input()
-#	if Input.is_action_just_released("attack_debug"):
-#		var attack_command := AttackCommand.new($CharacterUnit, $EnemyUnit, 1)
-#		attack_command.execute()
-#		command_array.push_back(attack_command)
-#	if Input.is_action_just_pressed("undo_debug"):
-#		undo_command()
 	# render UI stuff
 	#render_placement_line($Cursor.position)
 	render_character_ui_circle(current_unit.max_movement_radius)
