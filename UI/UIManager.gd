@@ -21,6 +21,11 @@ func cursor_can_click() -> bool:
 func print_message(message : String):
 	$Label.text = message
 
+func get_input():
+	# only want to actually set the position we want the unit to move to on click
+	if Input.is_action_just_released("left_mouse_click") and cursor_can_click():
+		game_board.do_movement(cursor.direction_to_cursor, cursor.distance_to_cursor)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass

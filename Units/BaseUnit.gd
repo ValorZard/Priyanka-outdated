@@ -28,22 +28,30 @@ func change_position(movement_direction : Vector3, movement_distance : float):
 
 func take_damage(damage_dealt : int):
 	self.health -= damage_dealt
+	# handle death
 	if self.health <= 0:
-		print("Unit is dead")
+		handle_death()
 
 # TODO: Figure out how death and reviving people works
 func heal_health(healed_amt : int):
 	if is_dead():
-		print("Unit is currently dead, attempting to revive")
+		#print("Unit is currently dead, attempting to revive")
 		self.health += healed_amt
 		if is_dead():
-			print("Unit is still dead")
+			#print("Unit is still dead")
+			pass
 		else:
-			print("Unit has been revived!")
+			#print("Unit has been revived!")
+			pass
 	else:
 		self.health += healed_amt
 
+func handle_death():
+	#print("Unit is dead")
+	pass
+
 func can_attack() -> bool:
+	#print(attack_area.array_of_possible_units_to_attack.size())
 	if attack_area.array_of_possible_units_to_attack.size() <= 0:
 		return false
 	return true

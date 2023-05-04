@@ -12,8 +12,9 @@ func _init(game_board : GameBoard, target: BaseUnit, damage_dealt):
 
 func execute():
 	target = current_unit.attack_area.get_nearest_unit()
+	#print(target)
 	# don't attack an enemy thats already dead
-	if !target.is_dead():
+	if target != null and !target.is_dead():
 		target.take_damage(damage_dealt)
 	else:
 		return false

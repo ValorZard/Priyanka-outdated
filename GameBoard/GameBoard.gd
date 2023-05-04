@@ -53,21 +53,21 @@ func undo_command():
 		command_array.pop_back().undo()
 
 func do_attack():
-	if $CharacterUnit.can_attack():
+	if current_unit.can_attack():
 		var attack_command := AttackCommand.new(self, $EnemyUnit, 1)
 		if attack_command.execute():
 			command_array.push_back(attack_command)
 
+func do_movement(direction : Vector3, distance : float):
+	var movement_command := MovementCommand.new(self, direction, distance)
+	if movement_command.execute():
+		command_array.push_back(movement_command)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	# update cursor data so we can use it for movement purposes
-	$UIManager.cursor.update_cursor($Camera3D, current_unit)
-	# only want to actually set the position we want the unit to move to on click
-	if Input.is_action_just_released("left_mouse_click") and ui_manager.cursor_can_click():
-		var movement_command := MovementCommand.new(self, 
-			$UIManager.cursor.direction_to_cursor, ui_manager.cursor.distance_to_cursor)
-		if movement_command.execute():
-			command_array.push_back(movement_command)
+	ui_manager.cursor.update_cursor($Camera3D, current_unit)
+	ui_manager.get_input()
 #	if Input.is_action_just_released("attack_debug"):
 #		var attack_command := AttackCommand.new($CharacterUnit, $EnemyUnit, 1)
 #		attack_command.execute()

@@ -24,16 +24,24 @@ func on_body_exited(body):
 
 # THIS FUNCTION WILL BREAK IF THERES NOTHING IN THE ARRAY
 # I have no idea how to solve this problem
+# gets the neartest target unit for the owner unit
 func get_nearest_unit() -> BaseUnit:
 	# check if this array is empty, or else the program will crash
 	assert(!array_of_possible_units_to_attack.is_empty())
-	var closest_enemy_unit : BaseUnit = array_of_possible_units_to_attack[0]
+	#print(array_of_possible_units_to_attack)
+	# set it to an impossible large number, might change later
+	var closest_distance_between_target_and_owner : float = 9223372036854775807
+	var closest_target_unit : BaseUnit
 	for unit in array_of_possible_units_to_attack:
-		if (unit.position - owner_unit.position).length() < (closest_enemy_unit.position - owner_unit.position).length():
+		if (unit.global_position - owner_unit.global_position).length() < closest_distance_between_target_and_owner:
 			# probably don't want to keep killing an enemy thats already dead
 			if !unit.is_dead():
-				closest_enemy_unit = unit
-	return closest_enemy_unit
+				closest_target_unit = unit
+				closest_distance_between_target_and_owner = (closest_target_unit.global_position - owner_unit.global_position).length()
+			else:
+				#print("this unit is dead, don't use, ", unit)
+				pass
+	return closest_target_unit
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
