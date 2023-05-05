@@ -9,17 +9,16 @@ class_name GameBoard
 var mouse_button_clicked : bool = false
 # actual data
 #var move_to_position : Vector3 = Vector3.ZERO
-# visual data
-@export var character_ui_circle_width : float = 1
-var ui_manager : UIManager
 var command_array : Array
 var units_in_initative_order : Array[BaseUnit]
 var current_unit_index : float
+# visual data
+@export var character_ui_circle_width : float = 1
+@onready var event_label : Label = $InputManager/EventLabel
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	current_unit_index = 0
-	ui_manager = $UIManager
 	# set up all the units in initative order
 	for node in get_children():
 		if node is BaseUnit:
@@ -51,7 +50,7 @@ func render_character_ui_circle(distance_to_cursor : float):
 	$CharacterUICircle.outer_radius = distance_to_cursor + character_ui_circle_width 
 
 func log_event(message : String):
-	ui_manager.print_message(message)
+	event_label.text = message
 
 # logic functions
 func get_current_unit():
@@ -72,18 +71,6 @@ func do_movement(direction : Vector3, distance : float):
 	if movement_command.execute():
 		command_array.push_back(movement_command)
 
-func do_current_unit_actions():
-	if get_current_unit() is PlayerUnit:
-		ui_manager.cursor.update_cursor($Camera3D, get_current_unit())
-		# do not move on unless the player actually does an input for the player unit
-		if ui_manager.is_movement_selected():
-			do_movement(ui_manager.cursor.direction_to_cursor, ui_manager.cursor.distance_to_cursor)
-	else:
-		print("on unit: ", get_current_unit().name)
-		# TODO: Actiually have an AI here
-		get_current_unit().set_action_points(0)
-		pass
-
 func go_to_next_unit():
 	# refresh current unit's action points before going to the next unit
 	#go to next unit. if reached the end, go back to the start
@@ -97,7 +84,6 @@ func go_to_next_unit():
 func _physics_process(delta):
 	# GAME LOOP -> update every single unit in the field, and let the player control the player units
 	# update cursor data so we can use it for movement purposes
-	do_current_unit_actions()
 	# render UI stuff
 	#render_placement_line($Cursor.position)
 	render_character_ui_circle(get_current_unit().max_movement_radius)
