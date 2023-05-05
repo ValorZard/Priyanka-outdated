@@ -42,6 +42,7 @@ func _input(event):
 #	$BoxLine.width = ($CharacterUnit.position - cursor_position).length()
 #	$BoxLine.rotation.y = $CharacterUnit.position.angle_to(cursor_position)
 
+# TODO: Move the UI Stuff somewhere else.
 # generate UI Circle around the player to show maximum distance it can go
 func render_character_ui_circle(distance_to_cursor : float):
 	$CharacterUICircle.position = get_current_unit().position
@@ -71,6 +72,7 @@ func do_movement(direction : Vector3, distance : float):
 	if movement_command.execute():
 		command_array.push_back(movement_command)
 
+# once all of the unit's action points are used up, move on to next unit
 func go_to_next_unit():
 	# refresh current unit's action points before going to the next unit
 	#go to next unit. if reached the end, go back to the start
