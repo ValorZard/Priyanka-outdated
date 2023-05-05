@@ -11,7 +11,12 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @export var health : int = 10
 @export var movement_speed : float = 7.5
 @export var max_movement_radius : float = 10 # maximum distance this unit can move in one turn in meters
+@export var action_points : int = 3
+@export var max_action_points : int = 3
 var attack_area : AttackArea = preload("res://Attacks/AttackArea.tscn").instantiate()
+
+signal out_of_action_points()
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -58,6 +63,19 @@ func can_attack() -> bool:
 
 func is_dead():
 	return self.health <= 0
+
+func get_action_points():
+	return action_points
+
+func set_action_points(action_points : int):
+	self.action_points = action_points
+	if action_points <= 0:
+		out_of_action_points.emit()
+		refill_action_points()
+		print("hello, ", self.name)
+
+func refill_action_points():
+	action_points = max_action_points
 
 func _physics_process(delta):
 	pass

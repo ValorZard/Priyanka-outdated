@@ -12,14 +12,20 @@ var mouse_button_clicked : bool = false
 # visual data
 @export var character_ui_circle_width : float = 1
 var ui_manager : UIManager
-
 var command_array : Array
-var current_unit : BaseUnit
+var units_in_initative_order : Array[BaseUnit]
+var current_unit_index : float
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	current_unit = $CharacterUnit
+	current_unit_index = 0
 	ui_manager = $UIManager
+	# set up all the units in initative order
+	for node in get_children():
+		if node is BaseUnit:
+			units_in_initative_order.append(node)
+	print(units_in_initative_order)
+	get_current_unit().connect("out_of_action_points", go_to_next_unit)
 
 func _input(event):
 	# Mouse in viewport coordinates.
@@ -39,7 +45,7 @@ func _input(event):
 
 # generate UI Circle around the player to show maximum distance it can go
 func render_character_ui_circle(distance_to_cursor : float):
-	$CharacterUICircle.position = current_unit.position
+	$CharacterUICircle.position = get_current_unit().position
 	$CharacterUICircle.inner_radius = distance_to_cursor
 	# add a bit of a buffer to the outer radius so it isn't messed up
 	$CharacterUICircle.outer_radius = distance_to_cursor + character_ui_circle_width 
@@ -48,12 +54,15 @@ func log_event(message : String):
 	ui_manager.print_message(message)
 
 # logic functions
+func get_current_unit():
+	return units_in_initative_order[current_unit_index]
+
 func undo_command():
 	if !command_array.is_empty():
 		command_array.pop_back().undo()
 
 func do_attack():
-	if current_unit.can_attack():
+	if get_current_unit().can_attack():
 		var attack_command := AttackCommand.new(self, $EnemyUnit, 1)
 		if attack_command.execute():
 			command_array.push_back(attack_command)
@@ -63,12 +72,32 @@ func do_movement(direction : Vector3, distance : float):
 	if movement_command.execute():
 		command_array.push_back(movement_command)
 
+func do_current_unit_actions():
+	if get_current_unit() is PlayerUnit:
+		ui_manager.cursor.update_cursor($Camera3D, get_current_unit())
+		# do not move on unless the player actually does an input for the player unit
+		if ui_manager.is_movement_selected():
+			do_movement(ui_manager.cursor.direction_to_cursor, ui_manager.cursor.distance_to_cursor)
+	else:
+		print("on unit: ", get_current_unit().name)
+		# TODO: Actiually have an AI here
+		get_current_unit().set_action_points(0)
+		pass
+
+func go_to_next_unit():
+	# refresh current unit's action points before going to the next unit
+	#go to next unit. if reached the end, go back to the start
+	current_unit_index += 1
+	if current_unit_index >= units_in_initative_order.size():
+		current_unit_index = 0
+	get_current_unit().connect("out_of_action_points", go_to_next_unit)
+	print("moving on to next unit : ", current_unit_index)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	# GAME LOOP -> update every single unit in the field, and let the player control the player units
 	# update cursor data so we can use it for movement purposes
-	ui_manager.cursor.update_cursor($Camera3D, current_unit)
-	ui_manager.get_input()
+	do_current_unit_actions()
 	# render UI stuff
 	#render_placement_line($Cursor.position)
-	render_character_ui_circle(current_unit.max_movement_radius)
+	render_character_ui_circle(get_current_unit().max_movement_radius)

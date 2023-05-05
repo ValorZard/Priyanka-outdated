@@ -11,7 +11,7 @@ var current_unit: BaseUnit
 
 func initialize(game_board : GameBoard):
 	self.game_board = game_board
-	self.current_unit = game_board.current_unit
+	self.current_unit = game_board.get_current_unit()
 	initialized = true
 
 func _init(game_board : GameBoard):
