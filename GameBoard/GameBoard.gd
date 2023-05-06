@@ -74,7 +74,6 @@ func do_movement(direction : Vector3, distance : float):
 
 # once all of the unit's action points are used up, move on to next unit
 func go_to_next_unit():
-	# refresh current unit's action points before going to the next unit
 	#go to next unit. if reached the end, go back to the start
 	current_unit_index += 1
 	if current_unit_index >= units_in_initative_order.size():
