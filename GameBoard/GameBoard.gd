@@ -14,7 +14,7 @@ var units_in_initative_order : Array[BaseUnit]
 var current_unit_index : float
 # visual data
 @export var character_ui_circle_width : float = 1
-@onready var event_label : Label = $InputManager/EventLabel
+@onready var event_label : RichTextLabel = $InputManager/EventLabel
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -51,7 +51,7 @@ func render_character_ui_circle(distance_to_cursor : float):
 	$CharacterUICircle.outer_radius = distance_to_cursor + character_ui_circle_width 
 
 func log_event(message : String):
-	event_label.text = message
+	event_label.text += message + "\n"
 
 # logic functions
 func get_current_unit():
