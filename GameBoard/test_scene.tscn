@@ -1,12 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://cvahu2laaulg3"]
+[gd_scene load_steps=10 format=3 uid="uid://vx5ax3lodml"]
 
 [ext_resource type="Script" path="res://GameBoard/GameBoard.gd" id="1_lty5j"]
+[ext_resource type="Script" path="res://UI/InputManager.gd" id="2_blcx6"]
 [ext_resource type="PackedScene" uid="uid://dfadgaktnm624" path="res://Units/PlayerUnit.tscn" id="3_dmna3"]
 [ext_resource type="PackedScene" uid="uid://cmy4ycwq53ul2" path="res://Prototyping/Box.tscn" id="4_t58ag"]
 [ext_resource type="Texture2D" uid="uid://dhjqljog8gjbn" path="res://icon.svg" id="5_7oytf"]
 [ext_resource type="Script" path="res://GameBoard/Cursor.gd" id="5_64lmv"]
 [ext_resource type="PackedScene" uid="uid://ouuora8lxpt7" path="res://Units/EnemyUnit.tscn" id="7_7icr8"]
-[ext_resource type="Script" path="res://UI/UIManager.gd" id="8_2vnjj"]
 [ext_resource type="Script" path="res://GameBoard/CombatManager.gd" id="8_quw6g"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pp4sk"]
@@ -19,16 +19,16 @@ script = ExtResource("1_lty5j")
 transform = Transform3D(1, 0, 0, 0, 0.642788, 0.766044, 0, -0.766044, 0.642788, 0, 20, 10)
 current = true
 
-[node name="UIManager" type="Control" parent="."]
+[node name="InputManager" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("8_2vnjj")
+script = ExtResource("2_blcx6")
 
-[node name="Cursor" type="Sprite3D" parent="UIManager"]
+[node name="Cursor" type="Sprite3D" parent="InputManager"]
 texture = ExtResource("5_7oytf")
 script = ExtResource("5_64lmv")
 
-[node name="AttackButton" type="Button" parent="UIManager"]
+[node name="AttackButton" type="Button" parent="InputManager"]
 layout_mode = 0
 offset_left = 58.0
 offset_top = 540.0
@@ -37,14 +37,14 @@ offset_bottom = 600.0
 text = "Attack
 "
 
-[node name="Label" type="Label" parent="UIManager"]
+[node name="EventLabel" type="Label" parent="InputManager"]
 layout_mode = 0
 offset_left = 435.0
 offset_top = 503.0
 offset_right = 877.0
 offset_bottom = 624.0
 
-[node name="UndoButton" type="Button" parent="UIManager"]
+[node name="UndoButton" type="Button" parent="InputManager"]
 layout_mode = 0
 offset_left = 934.0
 offset_top = 541.0
@@ -53,7 +53,7 @@ offset_bottom = 601.0
 text = "Undo
 "
 
-[node name="StatsLabel" type="Label" parent="UIManager"]
+[node name="StatsLabel" type="Label" parent="InputManager"]
 layout_mode = 0
 offset_left = 27.0
 offset_top = 462.0
@@ -94,3 +94,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.64167, 0.5, -26.417)
 
 [node name="EnemyUnit6" parent="." instance=ExtResource("7_7icr8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.48176, 0.5, -25.9327)
+
+[node name="PlayerUnit2" parent="." instance=ExtResource("3_dmna3")]
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
