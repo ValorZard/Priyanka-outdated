@@ -38,7 +38,7 @@ func do_current_unit_actions():
 	else:
 		print("on unit: ", game_board.get_current_unit().name)
 		# TODO: Actiually have an AI here
-		#game_board.do_attack()
+		game_board.do_attack()
 		game_board.get_current_unit().set_action_points(0)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

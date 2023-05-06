@@ -89,13 +89,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.23204, 0.5, -37.2569)
 [node name="EnemyUnit4" parent="." instance=ExtResource("7_7icr8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.05293, 0.5, -22.0237)
 
+[node name="PlayerUnit2" parent="." instance=ExtResource("3_dmna3")]
+transform = Transform3D(0.999109, 0.042207, 0, -0.042207, 0.999109, 0, 0, 0, 1, 6.60937, 2.30312, 0)
+
 [node name="EnemyUnit5" parent="." instance=ExtResource("7_7icr8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.64167, 0.5, -26.417)
 
 [node name="EnemyUnit6" parent="." instance=ExtResource("7_7icr8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.48176, 0.5, -25.9327)
 
-[node name="PlayerUnit2" parent="." instance=ExtResource("3_dmna3")]
-
 [node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
 one_shot = true
