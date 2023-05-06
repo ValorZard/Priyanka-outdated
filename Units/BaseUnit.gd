@@ -19,9 +19,12 @@ signal out_of_action_points()
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func setup_unit():
 	attack_area = preload("res://Attacks/AttackArea.tscn").instantiate()
 	add_child(attack_area)
+
+func _ready():
+	setup_unit()
 
 # note for future self, should figure out how to change this either move_and_slide or move_and_collide
 # that way I can take advantage of Godot's in engine physics stuff and not run into any weird bugs

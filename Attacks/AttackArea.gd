@@ -37,7 +37,7 @@ func get_nearest_unit() -> BaseUnit:
 			# probably don't want to keep killing an enemy thats already dead
 			if !unit.is_dead():
 				# only get unit that is on the other side.
-				#if (owner_unit is EnemyUnit and unit is PlayerUnit) or (owner_unit is PlayerUnit and unit is EnemyUnit):
+				if (owner_unit.is_in_group("enemy") and unit.is_in_group("player")) or (owner_unit.is_in_group("player") and unit.is_in_group("enemy")):
 					closest_target_unit = unit
 					closest_distance_between_target_and_owner = (closest_target_unit.global_position - owner_unit.global_position).length()
 			else:
