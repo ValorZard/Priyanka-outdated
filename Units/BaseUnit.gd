@@ -45,18 +45,23 @@ func heal_health(healed_amt : int):
 	if is_dead():
 		#print("Unit is currently dead, attempting to revive")
 		self.health += healed_amt
+		# if the unit is still dead
 		if is_dead():
 			#print("Unit is still dead")
 			pass
 		else:
 			#print("Unit has been revived!")
+			handle_revive()
 			pass
 	else:
 		self.health += healed_amt
 
 func handle_death():
-	#print("Unit is dead")
+	self.visible = false
 	pass
+
+func handle_revive():
+	self.visible = true
 
 func can_attack() -> bool:
 	#print(attack_area.array_of_possible_units_to_attack.size())
