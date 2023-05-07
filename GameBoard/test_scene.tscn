@@ -65,11 +65,6 @@ transform = Transform3D(0.965926, 0, 0.258819, -0.103606, 0.916384, 0.386661, -0
 
 [node name="PlayerUnit" parent="." instance=ExtResource("3_dmna3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -2)
-health = 10
-movement_speed = 7.5
-max_movement_radius = 10.0
-action_points = 3
-max_action_points = 3
 
 [node name="Box" parent="." instance=ExtResource("4_t58ag")]
 transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, -20)
@@ -81,62 +76,27 @@ material = SubResource("StandardMaterial3D_pp4sk")
 
 [node name="EnemyUnit" parent="." instance=ExtResource("7_7icr8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4435, 0.5, -14.7083)
-health = 10
-movement_speed = 7.5
-max_movement_radius = 10.0
-action_points = 3
-max_action_points = 3
 
 [node name="CombatManager" type="Node" parent="."]
 script = ExtResource("8_quw6g")
 
 [node name="EnemyUnit2" parent="." instance=ExtResource("7_7icr8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.4451, 0.5, -28.6717)
-health = 10
-movement_speed = 7.5
-max_movement_radius = 10.0
-action_points = 3
-max_action_points = 3
 
 [node name="EnemyUnit3" parent="." instance=ExtResource("7_7icr8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.23204, 0.5, -37.2569)
-health = 10
-movement_speed = 7.5
-max_movement_radius = 10.0
-action_points = 3
-max_action_points = 3
 
 [node name="EnemyUnit4" parent="." instance=ExtResource("7_7icr8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.05293, 0.5, -22.0237)
-health = 10
-movement_speed = 7.5
-max_movement_radius = 10.0
-action_points = 3
-max_action_points = 3
 
 [node name="PlayerUnit2" parent="." instance=ExtResource("3_dmna3")]
 transform = Transform3D(0.999109, 0.042207, 0, -0.042207, 0.999109, 0, 0, 0, 1, 6.60937, 2.30312, 0)
-health = 10
-movement_speed = 7.5
-max_movement_radius = 10.0
-action_points = 3
-max_action_points = 3
 
 [node name="EnemyUnit5" parent="." instance=ExtResource("7_7icr8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.64167, 0.5, -26.417)
-health = 10
-movement_speed = 7.5
-max_movement_radius = 10.0
-action_points = 3
-max_action_points = 3
 
 [node name="EnemyUnit6" parent="." instance=ExtResource("7_7icr8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.48176, 0.5, -25.9327)
-health = 10
-movement_speed = 7.5
-max_movement_radius = 10.0
-action_points = 3
-max_action_points = 3
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.25

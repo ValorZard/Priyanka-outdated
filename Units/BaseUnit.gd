@@ -72,6 +72,8 @@ func get_action_points():
 
 func set_action_points(action_points : int):
 	self.action_points = action_points
+	if self.action_points > self.max_action_points:
+		self.action_points = self.max_action_points
 	#if action_points <= 0:
 		#out_of_action_points.emit()
 		#refill_action_points()
