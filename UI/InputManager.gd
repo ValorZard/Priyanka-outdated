@@ -44,13 +44,18 @@ func do_current_unit_actions():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	cursor.update_cursor(camera3d, game_board.get_current_unit())
-	# once a unit has finished its turn, the next once can go
-	if turn_timer.is_stopped():
-		do_current_unit_actions()
-		# check if current unit is out of action points. If so, move on to the next unit
-		if game_board.get_current_unit().action_points <= 0:
-			game_board.get_current_unit().refill_action_points()
-			game_board.go_to_next_unit()
-			# restart timer now that the unit can't do anything more
-			turn_timer.start()
-	$StatsLabel.text = str(game_board.get_current_unit().name, " Action Points: ", game_board.get_current_unit().action_points)
+	# only care about doing the game loop if a side hasn't won yet
+	if !game_board.check_if_one_side_won():
+		# once a unit has finished its turn, the next once can go
+		if turn_timer.is_stopped():
+			do_current_unit_actions()
+			# check if current unit is out of action points. If so, move on to the next unit
+			if game_board.get_current_unit().action_points <= 0:
+				game_board.get_current_unit().refill_action_points()
+				game_board.go_to_next_unit()
+				# restart timer now that the unit can't do anything more
+				turn_timer.start()
+	else:
+		#print("its done dude")
+		pass
+	$StatsLabel.text = str(game_board.get_current_unit().name, "\nHP: ", game_board.get_current_unit().health, "\nAction Points: ", game_board.get_current_unit().action_points)

@@ -72,13 +72,28 @@ func do_movement(direction : Vector3, distance : float):
 	if movement_command.execute():
 		command_array.push_back(movement_command)
 
+func check_if_one_side_won() -> bool:
+	var number_of_player_units : int = 0
+	var number_of_enemy_units : int = 0
+	for unit in units_in_initative_order:
+		if !unit.is_dead():
+			if unit is PlayerUnit:
+				number_of_player_units += 1
+			elif unit is EnemyUnit:
+				number_of_enemy_units += 1
+	return (number_of_enemy_units == 0) or (number_of_player_units == 0)
+
+
 # once all of the unit's action points are used up, move on to next unit
 func go_to_next_unit():
+	# first, check if one side has one
 	#go to next unit. if reached the end, go back to the start
 	current_unit_index += 1
 	if current_unit_index >= units_in_initative_order.size():
 		current_unit_index = 0
-	get_current_unit().connect("out_of_action_points", go_to_next_unit)
+	# if the new unit we're on is dead, move on to the next one
+	if get_current_unit().is_dead() and !check_if_one_side_won():
+		go_to_next_unit()
 	print("moving on to next unit : ", current_unit_index)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

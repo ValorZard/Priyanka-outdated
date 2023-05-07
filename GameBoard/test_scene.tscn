@@ -55,10 +55,10 @@ text = "Undo
 
 [node name="StatsLabel" type="Label" parent="InputManager"]
 layout_mode = 0
-offset_left = 27.0
-offset_top = 462.0
-offset_right = 274.0
-offset_bottom = 512.0
+offset_left = 30.0
+offset_top = 420.0
+offset_right = 280.0
+offset_bottom = 470.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.965926, 0, 0.258819, -0.103606, 0.916384, 0.386661, -0.237178, -0.400301, 0.885159, 0, 70, -11)

@@ -15,7 +15,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @export var max_action_points : int = 3
 var attack_area : AttackArea = preload("res://Attacks/AttackArea.tscn").instantiate()
 
-signal out_of_action_points()
+#signal out_of_action_points()
 
 
 # Called when the node enters the scene tree for the first time.
