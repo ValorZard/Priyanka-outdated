@@ -1,30 +1,26 @@
 [gd_scene load_steps=3 format=3 uid="uid://vokfoas7a3nt"]
 
 [ext_resource type="Script" path="res://UI/CardHand.gd" id="1_7fhvl"]
-[ext_resource type="PackedScene" uid="uid://dj1nmmgfqjrx2" path="res://UI/Card.tscn" id="2_yyfhi"]
+[ext_resource type="PackedScene" uid="uid://c3x3m37qiby8q" path="res://UI/CardButton.tscn" id="2_eh4jl"]
 
-[node name="CardUI" type="Control"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 400.0
-offset_right = 400.0
-offset_bottom = 180.0
-
-[node name="CardHand" type="HBoxContainer" parent="."]
-layout_mode = 0
+[node name="CardUI" type="HBoxContainer"]
 offset_top = 450.0
 offset_right = 400.0
 offset_bottom = 630.0
 script = ExtResource("1_7fhvl")
 
-[node name="Card" parent="CardHand" instance=ExtResource("2_yyfhi")]
+[node name="CardButton" parent="." instance=ExtResource("2_eh4jl")]
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="Card2" parent="CardHand" instance=ExtResource("2_yyfhi")]
+[node name="CardButton2" parent="." instance=ExtResource("2_eh4jl")]
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="Card3" parent="CardHand" instance=ExtResource("2_yyfhi")]
+[node name="CardButton3" parent="." instance=ExtResource("2_eh4jl")]
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="Card4" parent="CardHand" instance=ExtResource("2_yyfhi")]
+[node name="CardButton4" parent="." instance=ExtResource("2_eh4jl")]
 layout_mode = 2
+size_flags_horizontal = 3

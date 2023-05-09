@@ -10,10 +10,16 @@ var count : int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for card in get_children():
-		if card is Card:
-			card.connect("button_up", _on_Card_Selected)
+	for card_button in get_children():
+		if card_button is Button:
+			card_button.connect("button_up", _on_Card_Selected)
 
+func is_hovered() -> bool:
+	for card_button in get_children():
+		if card_button is Button:
+			if card_button.is_hovered():
+				return true
+	return false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -22,4 +28,3 @@ func _process(delta):
 func _on_Card_Selected():
 	print("hello ", count)
 	count += 1
-	

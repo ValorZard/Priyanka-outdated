@@ -16,9 +16,11 @@ func _ready():
 	$AttackButton.connect("button_up", game_board.do_attack)
 	$UndoButton.connect("button_up", game_board.undo_command)
 
+
+
 # if the cursor is currently over a button or other UI element, don't allow it to click to move the unit
 func cursor_can_click() -> bool:
-	if $AttackButton.is_hovered() or $UndoButton.is_hovered():
+	if $AttackButton.is_hovered() or $UndoButton.is_hovered() or $CardUI.is_hovered():
 		return false
 	return true
 
