@@ -2,7 +2,7 @@ extends Button
 
 class_name CardButton
 
-var card_data : CardData = preload("res://Cards/CardData.tres")
+@export var card_data : CardData = preload("res://Cards/CardData.tres")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
