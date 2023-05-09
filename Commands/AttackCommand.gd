@@ -30,6 +30,6 @@ func execute():
 
 func undo():
 	target.heal_health(damage_dealt)
-	current_unit.set_action_points(current_unit.get_action_points()+1)
+	current_unit.set_action_points(current_unit.get_action_points() + action_point_cost)
 	game_board.log_event(str("undo! " , current_unit.name, " to ", target.name, " healed amount: ", damage_dealt, ", target health now: ", target.health))
 	return true
