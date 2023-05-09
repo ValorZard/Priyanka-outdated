@@ -7,6 +7,7 @@ var cursor : Cursor
 var camera3d : Camera3D
 var turn_timer : Timer 
 
+var is_game_over : bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	game_board = get_parent()
@@ -58,6 +59,8 @@ func _process(delta):
 				# restart timer now that the unit can't do anything more
 				turn_timer.start()
 	else:
-		#print("its done dude")
+		if is_game_over == false:
+			game_board.log_event("Game Over!")
+			is_game_over = true
 		pass
 	$StatsLabel.text = str(game_board.get_current_unit().name, "\nHP: ", game_board.get_current_unit().health, "\nAction Points: ", game_board.get_current_unit().action_points)

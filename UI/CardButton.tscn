@@ -1,5 +1,9 @@
-[gd_scene format=3 uid="uid://c3x3m37qiby8q"]
+[gd_scene load_steps=2 format=3 uid="uid://c3x3m37qiby8q"]
+
+[ext_resource type="Script" path="res://UI/CardButton.gd" id="1_d6j3d"]
 
 [node name="CardButton" type="Button"]
 offset_right = 85.0
 offset_bottom = 150.0
+text = "LOL"
+script = ExtResource("1_d6j3d")

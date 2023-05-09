@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://2qob5dhccxko"]
+
+[ext_resource type="Script" path="res://Cards/CardData.gd" id="1_57ebq"]
+
+[resource]
+script = ExtResource("1_57ebq")
+attack_point_cost = 0
+description = "lorem ipsum"
