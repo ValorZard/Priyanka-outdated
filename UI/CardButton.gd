@@ -8,7 +8,7 @@ var game_board : GameBoard
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	self.text = str("Action Points: ", card_data.action_point_cost, "\n", card_data.description)
+	self.text = str("Action Points: ", card_data.action_point_cost, "\n", "Attack Damage: ", card_data.attack_damage, "\n", card_data.description)
 	self.connect("button_down", play_card)
 
 
