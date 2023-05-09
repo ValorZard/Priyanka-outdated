@@ -8,11 +8,19 @@ extends HBoxContainer
 
 var count : int = 0
 
+var game_board : GameBoard
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for card_button in get_children():
 		if card_button is Button:
 			card_button.connect("button_up", _on_Card_Selected)
+
+func set_game_board(game_board : GameBoard):
+	self.game_board = game_board
+	for card_button in get_children():
+		if card_button is CardButton:
+			card_button.game_board = game_board
 
 func is_hovered() -> bool:
 	for card_button in get_children():

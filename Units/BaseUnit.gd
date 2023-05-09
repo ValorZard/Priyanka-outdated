@@ -13,6 +13,10 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @export var max_movement_radius : float = 10 # maximum distance this unit can move in one turn in meters
 @export var action_points : int = 3
 @export var max_action_points : int = 3
+
+# base attack information
+@export var base_attack_damage : int = 1
+@export var base_attack_action_point_cost : int = 1
 var attack_area : AttackArea = preload("res://Attacks/AttackArea.tscn").instantiate()
 
 #signal out_of_action_points()

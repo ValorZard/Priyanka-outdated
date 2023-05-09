@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://vx5ax3lodml"]
+[gd_scene load_steps=11 format=3 uid="uid://y14fn6j2kqm3"]
 
 [ext_resource type="Script" path="res://GameBoard/GameBoard.gd" id="1_lty5j"]
 [ext_resource type="Script" path="res://UI/InputManager.gd" id="2_blcx6"]
@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cmy4ycwq53ul2" path="res://Prototyping/Box.tscn" id="4_t58ag"]
 [ext_resource type="Texture2D" uid="uid://dhjqljog8gjbn" path="res://icon.svg" id="5_7oytf"]
 [ext_resource type="Script" path="res://GameBoard/Cursor.gd" id="5_64lmv"]
-[ext_resource type="PackedScene" uid="uid://vokfoas7a3nt" path="res://UI/CardUI.tscn" id="5_ienob"]
+[ext_resource type="PackedScene" uid="uid://dsliayb2rhvp2" path="res://UI/CardDeck.tscn" id="5_ienob"]
 [ext_resource type="PackedScene" uid="uid://ouuora8lxpt7" path="res://Units/EnemyUnit.tscn" id="7_7icr8"]
 [ext_resource type="Script" path="res://GameBoard/CombatManager.gd" id="8_quw6g"]
 
@@ -54,7 +54,7 @@ offset_bottom = 601.0
 text = "Undo
 "
 
-[node name="CardUI" parent="InputManager" instance=ExtResource("5_ienob")]
+[node name="CardDeck" parent="InputManager" instance=ExtResource("5_ienob")]
 layout_mode = 0
 offset_left = 400.0
 offset_top = 441.0

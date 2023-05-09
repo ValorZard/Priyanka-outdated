@@ -14,14 +14,15 @@ func _ready():
 	cursor = $Cursor
 	camera3d = $"../Camera3D"
 	turn_timer = $"../Timer"
-	$AttackButton.connect("button_up", game_board.do_attack)
+	$CardDeck.set_game_board(game_board)
+	$AttackButton.connect("button_up", do_current_unit_base_attack)
 	$UndoButton.connect("button_up", game_board.undo_command)
 
 
 
 # if the cursor is currently over a button or other UI element, don't allow it to click to move the unit
 func cursor_can_click() -> bool:
-	if $AttackButton.is_hovered() or $UndoButton.is_hovered() or $CardUI.is_hovered():
+	if $AttackButton.is_hovered() or $UndoButton.is_hovered() or $CardDeck.is_hovered():
 		return false
 	return true
 
@@ -41,8 +42,13 @@ func do_current_unit_actions():
 	else:
 		print("on unit: ", game_board.get_current_unit().name)
 		# TODO: Actiually have an AI here
-		game_board.do_attack()
+		game_board.do_attack(game_board.get_current_unit().base_attack_damage, game_board.get_current_unit().base_attack_action_point_cost)
 		game_board.get_current_unit().set_action_points(0)
+
+# called when the attack button is pressed, does the unit's base attack (different from Card attacks)
+func do_current_unit_base_attack():
+	game_board.do_attack(game_board.get_current_unit().base_attack_damage, game_board.get_current_unit().base_attack_action_point_cost)
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
