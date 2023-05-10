@@ -20,15 +20,32 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var attack_area : AttackArea = preload("res://Attacks/AttackArea.tscn").instantiate()
 
 #signal out_of_action_points()
+# UI Stuff
+var ui_circle : CSGTorus3D
 
 
 # Called when the node enters the scene tree for the first time.
 func setup_unit():
 	attack_area = preload("res://Attacks/AttackArea.tscn").instantiate()
 	add_child(attack_area)
+	ui_circle = CSGTorus3D.new()
+	ui_circle.visible = false
+	add_child(ui_circle)
 
 func _ready():
 	setup_unit()
+
+# if this unit is the current unit selected by the game board, set up UI
+func enable_unit():
+	# restore action points and other important things
+	refill_action_points()
+	# enable unit specific ui
+	ui_circle.visible = true
+	render_ui_circle()
+
+func disable_unit():
+	# disable unit specific ui
+	ui_circle.visible = false
 
 # note for future self, should figure out how to change this either move_and_slide or move_and_collide
 # that way I can take advantage of Godot's in engine physics stuff and not run into any weird bugs
@@ -93,3 +110,12 @@ func refill_action_points():
 
 func _physics_process(delta):
 	pass
+
+func _process(delta):
+	pass
+
+# generate UI Circle around the unit to show maximum distance it can go
+func render_ui_circle():
+	ui_circle.global_position = self.global_position
+	ui_circle.inner_radius = max_movement_radius
+	ui_circle.outer_radius = max_movement_radius + 1

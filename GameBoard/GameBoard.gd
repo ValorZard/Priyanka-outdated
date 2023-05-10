@@ -23,8 +23,8 @@ func _ready():
 	for node in get_children():
 		if node is BaseUnit:
 			units_in_initative_order.append(node)
-	print(units_in_initative_order)
-	get_current_unit().connect("out_of_action_points", go_to_next_unit)
+	#print(units_in_initative_order)
+	get_current_unit().enable_unit()
 
 func _input(event):
 	# Mouse in viewport coordinates.
@@ -41,14 +41,6 @@ func _input(event):
 #	$BoxLine.position = ($CharacterUnit.position + cursor_position) / 2
 #	$BoxLine.width = ($CharacterUnit.position - cursor_position).length()
 #	$BoxLine.rotation.y = $CharacterUnit.position.angle_to(cursor_position)
-
-# TODO: Move the UI Stuff somewhere else.
-# generate UI Circle around the player to show maximum distance it can go
-func render_character_ui_circle(distance_to_cursor : float):
-	$CharacterUICircle.position = get_current_unit().position
-	$CharacterUICircle.inner_radius = distance_to_cursor
-	# add a bit of a buffer to the outer radius so it isn't messed up
-	$CharacterUICircle.outer_radius = distance_to_cursor + character_ui_circle_width 
 
 func log_event(message : String):
 	event_label.text += message + "\n"
@@ -88,7 +80,8 @@ func check_if_one_side_won() -> bool:
 
 # once all of the unit's action points are used up, move on to next unit
 func go_to_next_unit():
-	# first, check if one side has one
+	# clean up stuff with the current unit
+	get_current_unit().disable_unit()
 	#go to next unit. if reached the end, go back to the start
 	current_unit_index += 1
 	if current_unit_index >= units_in_initative_order.size():
@@ -96,6 +89,8 @@ func go_to_next_unit():
 	# if the new unit we're on is dead, move on to the next one
 	if get_current_unit().is_dead() and !check_if_one_side_won():
 		go_to_next_unit()
+	# set up new unit
+	get_current_unit().enable_unit()
 	print("moving on to next unit : ", current_unit_index)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -104,4 +99,5 @@ func _physics_process(delta):
 	# update cursor data so we can use it for movement purposes
 	# render UI stuff
 	#render_placement_line($Cursor.position)
-	render_character_ui_circle(get_current_unit().max_movement_radius)
+	#render_character_ui_circle(get_current_unit().max_movement_radius)
+	pass

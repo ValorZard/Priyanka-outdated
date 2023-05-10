@@ -60,7 +60,6 @@ func _process(delta):
 			do_current_unit_actions()
 			# check if current unit is out of action points. If so, move on to the next unit
 			if game_board.get_current_unit().action_points <= 0:
-				game_board.get_current_unit().refill_action_points()
 				game_board.go_to_next_unit()
 				# restart timer now that the unit can't do anything more
 				turn_timer.start()
