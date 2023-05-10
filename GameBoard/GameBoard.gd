@@ -15,6 +15,7 @@ var current_unit_index : float
 # visual data
 @export var character_ui_circle_width : float = 1
 @onready var event_label : RichTextLabel = $InputManager/EventLabel
+var event_queue : Array[String]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -43,7 +44,10 @@ func _input(event):
 #	$BoxLine.rotation.y = $CharacterUnit.position.angle_to(cursor_position)
 
 func log_event(message : String):
-	event_label.text += message + "\n"
+	event_queue.push_front(message)
+	event_label.text = ""
+	for event in event_queue:
+		event_label.text += event + "\n"
 
 # logic functions
 func get_current_unit():
