@@ -64,7 +64,8 @@ func _process(delta):
 	# only care about doing the game loop if a side hasn't won yet
 	if !game_board.check_if_one_side_won():
 		# once a unit has finished its turn, the next once can go
-		if turn_timer.is_stopped():
+		# also make sure inputs from the previous scene don't accidentally carry over here
+		if turn_timer.is_stopped() and input_buffer_timer.is_stopped():
 			do_current_unit_actions()
 			update_ui()
 			# check if current unit is out of action points. If so, move on to the next unit
