@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1ku0c5m0y7x8"]
+
+[ext_resource type="Script" path="res://Scenes/Tutorial/Tutorial.gd" id="1_s8734"]
+
+[node name="Tutorial" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s8734")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "How to play!
+Each turn, every unit on the board has 3 action points.
+Different actions have different action point costs.
+Moving once costs 1 action point.
+Doing a Basic Attack costs 1 action point.
+Along with your basic actions, the player units have access to randomly drawn cards from their deck, each with different effects and action point costs. 
+Make good decisions, and you'll win the battle!"
+
+[node name="BackToMenuButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -100.0
+offset_right = 200.0
+grow_vertical = 0
+text = "Back to Menu"

@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_57ebq")
-action_point_cost = 2
-attack_damage = 3
-description = "lorem ipsum"
+action_point_cost = 0
+attack_damage = 0
+description = ""

@@ -2,7 +2,7 @@ extends Button
 
 class_name CardButton
 
-@export var card_data : CardData = preload("res://Cards/CardData.tres")
+@export var card_data : CardData = preload("res://Cards/CardList/TestCard.tres")
 
 var game_board : GameBoard
 

@@ -17,12 +17,17 @@ func _ready():
 	$CardDeck.set_game_board(game_board)
 	$AttackButton.connect("button_up", do_current_unit_base_attack)
 	$UndoButton.connect("button_up", game_board.undo_command)
+	$BackToMenuButton.connect("button_up", go_back_to_menu)
 
+func go_back_to_menu():
+	get_tree().change_scene_to_file("res://Scenes/MainMenu/MainMenu.tscn")
 
 
 # if the cursor is currently over a button or other UI element, don't allow it to click to move the unit
+# TODO: figure out how to make this function not so fragile
+# Honestly i really need to rethink how this function works in general
 func cursor_can_click() -> bool:
-	if $AttackButton.is_hovered() or $UndoButton.is_hovered() or $CardDeck.is_hovered():
+	if $AttackButton.is_hovered() or $UndoButton.is_hovered() or $CardDeck.is_hovered() or $BackToMenuButton.is_hovered():
 		return false
 	return true
 
