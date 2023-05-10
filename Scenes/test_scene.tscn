@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://y14fn6j2kqm3"]
+[gd_scene load_steps=12 format=3 uid="uid://y14fn6j2kqm3"]
 
 [ext_resource type="Script" path="res://GameBoard/GameBoard.gd" id="1_lty5j"]
 [ext_resource type="Script" path="res://UI/InputManager.gd" id="2_blcx6"]
@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://dsliayb2rhvp2" path="res://UI/CardDeck.tscn" id="5_ienob"]
 [ext_resource type="PackedScene" uid="uid://ouuora8lxpt7" path="res://Units/EnemyUnit.tscn" id="7_7icr8"]
 [ext_resource type="Script" path="res://GameBoard/CombatManager.gd" id="8_quw6g"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4u0tp"]
+font_size = 20
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pp4sk"]
 albedo_color = Color(0.615686, 0.866667, 0, 1)
@@ -22,7 +25,11 @@ current = true
 
 [node name="InputManager" type="Control" parent="." node_paths=PackedStringArray("game_board", "cursor", "camera3d", "turn_timer", "input_buffer_timer")]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("2_blcx6")
 game_board = NodePath("..")
 cursor = NodePath("Cursor")
@@ -35,49 +42,71 @@ texture = ExtResource("5_7oytf")
 script = ExtResource("5_64lmv")
 
 [node name="AttackButton" type="Button" parent="InputManager"]
-layout_mode = 0
-offset_left = 58.0
-offset_top = 540.0
-offset_right = 259.0
-offset_bottom = 600.0
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -100.0
+offset_right = 250.0
+grow_vertical = 0
 text = "Attack
 "
 
 [node name="EventLabel" type="RichTextLabel" parent="InputManager"]
-layout_mode = 0
-offset_left = 305.0
-offset_right = 1055.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -375.0
+offset_right = 375.0
 offset_bottom = 75.0
+grow_horizontal = 2
 
 [node name="UndoButton" type="Button" parent="InputManager"]
-layout_mode = 0
-offset_left = 934.0
-offset_top = 541.0
-offset_right = 1135.0
-offset_bottom = 601.0
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -100.0
+grow_horizontal = 0
+grow_vertical = 0
 text = "Undo
 "
 
 [node name="CardDeck" parent="InputManager" instance=ExtResource("5_ienob")]
-layout_mode = 0
-offset_left = 400.0
-offset_top = 441.0
-offset_right = 800.0
-offset_bottom = 621.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -180.0
+offset_right = 200.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="StatsLabel" type="Label" parent="InputManager"]
-layout_mode = 0
-offset_left = 30.0
-offset_top = 420.0
-offset_right = 280.0
-offset_bottom = 470.0
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.66358
+anchor_bottom = 0.66358
+offset_top = -25.0
+offset_right = 250.0
+offset_bottom = 25.0
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_4u0tp")
+metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true
 
 [node name="BackToMenuButton" type="Button" parent="InputManager"]
-layout_mode = 0
-offset_left = 57.0
-offset_top = 39.0
-offset_right = 209.0
-offset_bottom = 109.0
+layout_mode = 1
+offset_right = 200.0
+offset_bottom = 80.0
 text = "Back To Menu"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
