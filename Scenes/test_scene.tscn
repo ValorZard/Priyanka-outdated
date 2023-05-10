@@ -20,10 +20,15 @@ script = ExtResource("1_lty5j")
 transform = Transform3D(1, 0, 0, 0, 0.642788, 0.766044, 0, -0.766044, 0.642788, 0, 20, 10)
 current = true
 
-[node name="InputManager" type="Control" parent="."]
+[node name="InputManager" type="Control" parent="." node_paths=PackedStringArray("game_board", "cursor", "camera3d", "turn_timer", "input_buffer_timer")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("2_blcx6")
+game_board = NodePath("..")
+cursor = NodePath("Cursor")
+camera3d = NodePath("../Camera3D")
+turn_timer = NodePath("../TurnTimer")
+input_buffer_timer = NodePath("../InputBufferTimer")
 
 [node name="Cursor" type="Sprite3D" parent="InputManager"]
 texture = ExtResource("5_7oytf")
@@ -112,6 +117,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.64167, 0.5, -26.417)
 [node name="EnemyUnit6" parent="." instance=ExtResource("7_7icr8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.48176, 0.5, -25.9327)
 
-[node name="Timer" type="Timer" parent="."]
+[node name="TurnTimer" type="Timer" parent="."]
 wait_time = 0.25
 one_shot = true
+
+[node name="InputBufferTimer" type="Timer" parent="."]

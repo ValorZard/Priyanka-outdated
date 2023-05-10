@@ -2,18 +2,19 @@ extends Control
 
 class_name InputManager
 
-var game_board : GameBoard
-var cursor : Cursor
-var camera3d : Camera3D
-var turn_timer : Timer 
+@export var game_board : GameBoard
+@export var cursor : Cursor
+@export var camera3d : Camera3D
+@export var turn_timer : Timer 
+@export var input_buffer_timer : Timer
 
 var is_game_over : bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	game_board = get_parent()
-	cursor = $Cursor
-	camera3d = $"../Camera3D"
-	turn_timer = $"../Timer"
+	#game_board = get_parent()
+	#cursor = $Cursor
+	#camera3d = $"../Camera3D"
+	#turn_timer = $"../TurnTimer"
 	$CardDeck.set_game_board(game_board)
 	$AttackButton.connect("button_up", do_current_unit_base_attack)
 	$UndoButton.connect("button_up", game_board.undo_command)
@@ -53,7 +54,9 @@ func do_current_unit_actions():
 # called when the attack button is pressed, does the unit's base attack (different from Card attacks)
 func do_current_unit_base_attack():
 	game_board.do_attack(game_board.get_current_unit().base_attack_damage, game_board.get_current_unit().base_attack_action_point_cost)
-	
+
+func update_ui():
+	$StatsLabel.text = str("It's ",game_board.get_current_unit().name, " Turn! \nHP: ", game_board.get_current_unit().health, "\nAction Points: ", game_board.get_current_unit().action_points)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -63,6 +66,7 @@ func _process(delta):
 		# once a unit has finished its turn, the next once can go
 		if turn_timer.is_stopped():
 			do_current_unit_actions()
+			update_ui()
 			# check if current unit is out of action points. If so, move on to the next unit
 			if game_board.get_current_unit().action_points <= 0:
 				game_board.go_to_next_unit()
@@ -73,4 +77,3 @@ func _process(delta):
 			game_board.log_event("Game Over!")
 			is_game_over = true
 		pass
-	$StatsLabel.text = str(game_board.get_current_unit().name, "\nHP: ", game_board.get_current_unit().health, "\nAction Points: ", game_board.get_current_unit().action_points)
