@@ -27,15 +27,6 @@ func _ready():
 	#print(units_in_initative_order)
 	get_current_unit().enable_unit()
 
-func _input(event):
-	# Mouse in viewport coordinates.
-	if event is InputEventMouseButton:
-		#print("Mouse Click/Unclick at: ", event.position)
-		pass
-	elif event is InputEventMouseMotion:
-		#print("Mouse Motion at: ", event.position)
-		pass
-
 # generate "line" between cursor and player for UI purposes
 # NOTE: Doesn't currently work properly, rotation is a bit jank
 #func render_placement_line(cursor_position : Vector3):
@@ -58,11 +49,13 @@ func undo_command():
 		command_array.pop_back().undo()
 
 # make the current unit controlled by the game board attack
-func do_attack(damage_dealt : int, action_point_cost : int):
+func do_attack(damage_dealt : int, action_point_cost : int) -> bool:
 	if get_current_unit().can_attack():
 		var attack_command := AttackCommand.new(self, $EnemyUnit, damage_dealt, action_point_cost)
 		if attack_command.execute():
 			command_array.push_back(attack_command)
+			return true
+	return false
 
 # make the current unit controlled by the game board move
 func do_movement(direction : Vector3, distance : float):

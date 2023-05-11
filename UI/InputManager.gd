@@ -12,6 +12,7 @@ class_name InputManager
 var mouse_in_ui := false
 
 var is_game_over : bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	card_deck_ui.set_game_board(game_board)
@@ -36,11 +37,11 @@ func bind_mouse_stuff_to_all_children():
 			node.connect("mouse_exited", set_mouse_out_of_ui.bind(node))
 
 func set_mouse_in_ui(node):
-	print("mouse in ui, from ", node.name)
+	#print("mouse in ui, from ", node.name)
 	mouse_in_ui = true
 
 func set_mouse_out_of_ui(node):
-	print("mouse out of ui, from ", node.name)
+	#print("mouse out of ui, from ", node.name)
 	mouse_in_ui = false
 
 # if the cursor is currently over a button or other UI element, don't allow it to click to move the unit
@@ -80,8 +81,21 @@ func update_deck_ui():
 	card_deck_ui.update_deck_ui(game_board.get_current_unit())
 	bind_mouse_stuff_to_all_children()
 
+# put the game loop through here since this is a single player turn based game
+# REALLY don't want to add multiplayer, that would require
+func _input(event):
+#	# Mouse in viewport coordinates.
+#	if event is InputEventMouseButton:
+#		#print("Mouse Click/Unclick at: ", event.position)
+#		pass
+#	elif event is InputEventMouseMotion:
+#		#print("Mouse Motion at: ", event.position)
+#		pass
+	pass
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	# since this is visual, we want to update cursor as fast as possible
 	cursor.update_cursor(camera3d, game_board.get_current_unit())
 	# only care about doing the game loop if a side hasn't won yet
 	if !game_board.check_if_one_side_won():
