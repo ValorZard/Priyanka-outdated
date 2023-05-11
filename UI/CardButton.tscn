@@ -1,9 +1,54 @@
-[gd_scene load_steps=2 format=3 uid="uid://c3x3m37qiby8q"]
+[gd_scene load_steps=4 format=3 uid="uid://c3x3m37qiby8q"]
 
 [ext_resource type="Script" path="res://UI/CardButton.gd" id="1_d6j3d"]
+[ext_resource type="Resource" uid="uid://dn604xmeqh152" path="res://Cards/CardList/BlastBlowCard.tres" id="2_ebdk4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_mvyiv"]
+font_size = 12
 
 [node name="CardButton" type="Button"]
-offset_right = 85.0
+offset_right = 100.0
 offset_bottom = 150.0
-text = "LOL"
 script = ExtResource("1_d6j3d")
+card_data = ExtResource("2_ebdk4")
+
+[node name="CardName" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+
+[node name="CardStats" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -45.0
+offset_right = 20.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CardDescription" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -86.0
+offset_right = 50.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+label_settings = SubResource("LabelSettings_mvyiv")
+horizontal_alignment = 1
+autowrap_mode = 2

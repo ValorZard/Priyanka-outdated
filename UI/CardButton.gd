@@ -2,13 +2,15 @@ extends Button
 
 class_name CardButton
 
-@export var card_data : CardData = preload("res://Cards/CardList/TestCard.tres")
+@export var card_data : CardData
 
 var game_board : GameBoard
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	self.text = str("Action Points: ", card_data.action_point_cost, "\n", "Attack Damage: ", card_data.attack_damage, "\n", card_data.description)
+	$CardName.text = card_data.card_name
+	$CardStats.text = str("AP: ", card_data.action_point_cost, " DMG: ", card_data.attack_damage)
+	$CardDescription.text = card_data.description
 	self.connect("button_down", play_card)
 
 

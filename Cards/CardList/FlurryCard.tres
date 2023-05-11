@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://tl4by1gv6g8"]
+
+[ext_resource type="Script" path="res://Cards/CardData.gd" id="1_y8r8c"]
+
+[resource]
+script = ExtResource("1_y8r8c")
+card_name = "Flurry"
+action_point_cost = 3
+attack_damage = 2
+description = "Make 4 of these attacks against the same target."

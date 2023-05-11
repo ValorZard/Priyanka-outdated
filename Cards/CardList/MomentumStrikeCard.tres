@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://bmv4a7piqgmju"]
+
+[ext_resource type="Script" path="res://Cards/CardData.gd" id="1_pti31"]
+
+[resource]
+script = ExtResource("1_pti31")
+card_name = "Momentum Strike"
+card_type = 0
+action_point_cost = 2
+attack_damage = 3
+description = "After hitting, Priyanka may move up to 3 squares and make an attack against a different target with Damage Power+2."

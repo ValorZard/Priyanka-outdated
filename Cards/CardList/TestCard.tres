@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://df1vh1gbvvymw"]
-
-[ext_resource type="Script" path="res://Cards/CardData.gd" id="1_4jtui"]
-
-[resource]
-script = ExtResource("1_4jtui")
-action_point_cost = 2
-attack_damage = 3
-description = "lorem ipsum"

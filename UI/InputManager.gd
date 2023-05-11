@@ -8,29 +8,42 @@ class_name InputManager
 @export var turn_timer : Timer 
 @export var input_buffer_timer : Timer
 
+var mouse_in_ui := false
+
 var is_game_over : bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#game_board = get_parent()
-	#cursor = $Cursor
-	#camera3d = $"../Camera3D"
-	#turn_timer = $"../TurnTimer"
 	$CardDeck.set_game_board(game_board)
 	$AttackButton.connect("button_up", do_current_unit_base_attack)
 	$UndoButton.connect("button_up", game_board.undo_command)
 	$BackToMenuButton.connect("button_up", go_back_to_menu)
+	for node in get_all_children(self):
+		if node != self: # we dont want to count self as something the mouse can enter and exit
+			# use Callable.bind to make the signal have extra parameters when detected
+			node.connect("mouse_entered", set_mouse_in_ui.bind(node))
+			node.connect("mouse_exited", set_mouse_out_of_ui.bind(node))
+
+func get_all_children(in_node,arr:=[]):
+	arr.push_back(in_node)
+	for child in in_node.get_children():
+		arr = get_all_children(child,arr)
+	return arr
 
 func go_back_to_menu():
 	get_tree().change_scene_to_file("res://Scenes/MainMenu/MainMenu.tscn")
 
+func set_mouse_in_ui(node):
+	#print("mouse in ui, from ", node.name)
+	mouse_in_ui = true
+
+func set_mouse_out_of_ui(node):
+	#print("mouse out of ui, from ", node.name)
+	mouse_in_ui = false
+
 
 # if the cursor is currently over a button or other UI element, don't allow it to click to move the unit
-# TODO: figure out how to make this function not so fragile
-# Honestly i really need to rethink how this function works in general
 func cursor_can_click() -> bool:
-	if $AttackButton.is_hovered() or $UndoButton.is_hovered() or $CardDeck.is_hovered() or $BackToMenuButton.is_hovered():
-		return false
-	return true
+	return !mouse_in_ui
 
 # get value if we were actually able to get an input for movement or not
 func is_movement_selected() -> bool:
@@ -46,7 +59,7 @@ func do_current_unit_actions():
 		is_movement_selected()
 		pass
 	else:
-		print("on unit: ", game_board.get_current_unit().name)
+		#print("on unit: ", game_board.get_current_unit().name)
 		# TODO: Actiually have an AI here
 		game_board.do_attack(game_board.get_current_unit().base_attack_damage, game_board.get_current_unit().base_attack_action_point_cost)
 		game_board.get_current_unit().set_action_points(0)

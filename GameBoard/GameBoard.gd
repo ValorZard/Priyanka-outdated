@@ -95,7 +95,7 @@ func go_to_next_unit():
 		go_to_next_unit()
 	# set up new unit
 	get_current_unit().enable_unit()
-	print("moving on to next unit : ", current_unit_index)
+	#print("moving on to next unit : ", current_unit_index)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
