@@ -15,14 +15,12 @@ var is_game_over : bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	card_deck_ui.set_game_board(game_board)
+	#print(game_board.get_current_unit())
 	$AttackButton.connect("button_up", do_current_unit_base_attack)
 	$UndoButton.connect("button_up", game_board.undo_command)
 	$BackToMenuButton.connect("button_up", go_back_to_menu)
-	for node in get_all_children(self):
-		if node != self: # we dont want to count self as something the mouse can enter and exit
-			# use Callable.bind to make the signal have extra parameters when detected
-			node.connect("mouse_entered", set_mouse_in_ui.bind(node))
-			node.connect("mouse_exited", set_mouse_out_of_ui.bind(node))
+	#update_text_ui()
+	#update_deck_ui()
 
 func get_all_children(in_node,arr:=[]):
 	arr.push_back(in_node)
@@ -30,21 +28,27 @@ func get_all_children(in_node,arr:=[]):
 		arr = get_all_children(child,arr)
 	return arr
 
-func go_back_to_menu():
-	get_tree().change_scene_to_file("res://Scenes/MainMenu/MainMenu.tscn")
+func bind_mouse_stuff_to_all_children():
+	for node in get_all_children(self):
+		if node != self: # we dont want to count self as something the mouse can enter and exit
+			# use Callable.bind to make the signal have extra parameters when detected
+			node.connect("mouse_entered", set_mouse_in_ui.bind(node))
+			node.connect("mouse_exited", set_mouse_out_of_ui.bind(node))
 
 func set_mouse_in_ui(node):
-	#print("mouse in ui, from ", node.name)
+	print("mouse in ui, from ", node.name)
 	mouse_in_ui = true
 
 func set_mouse_out_of_ui(node):
-	#print("mouse out of ui, from ", node.name)
+	print("mouse out of ui, from ", node.name)
 	mouse_in_ui = false
-
 
 # if the cursor is currently over a button or other UI element, don't allow it to click to move the unit
 func cursor_can_click() -> bool:
 	return !mouse_in_ui
+
+func go_back_to_menu():
+	get_tree().change_scene_to_file("res://Scenes/MainMenu/MainMenu.tscn")
 
 # get value if we were actually able to get an input for movement or not
 func is_movement_selected() -> bool:
@@ -69,9 +73,12 @@ func do_current_unit_actions():
 func do_current_unit_base_attack():
 	game_board.do_attack(game_board.get_current_unit().base_attack_damage, game_board.get_current_unit().base_attack_action_point_cost)
 
-func update_ui():
+func update_text_ui():
 	$StatsLabel.text = str("It's ",game_board.get_current_unit().name, " Turn! \nHP: ", game_board.get_current_unit().health, "\nAction Points: ", game_board.get_current_unit().action_points)
+
+func update_deck_ui():
 	card_deck_ui.update_deck_ui(game_board.get_current_unit())
+	bind_mouse_stuff_to_all_children()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -82,12 +89,19 @@ func _process(delta):
 		# also make sure inputs from the previous scene don't accidentally carry over here
 		if turn_timer.is_stopped() and input_buffer_timer.is_stopped():
 			do_current_unit_actions()
-			update_ui()
+			update_text_ui()
 			# check if current unit is out of action points. If so, move on to the next unit
 			if game_board.get_current_unit().action_points <= 0:
 				game_board.go_to_next_unit()
+				# make sure to change the deck to the one the next unit has
+				update_deck_ui()
 				# restart timer now that the unit can't do anything more
 				turn_timer.start()
+		elif !input_buffer_timer.is_stopped():
+			# while the input buffer timer is still going, we can go ahead and update deck ui
+			# we can't do this on ready, since it relies on game board to be fully loaded in
+			# problem is, it ends up generating and discarding a bunch of card buttons before we can catch it, which is VERY annoying
+			update_deck_ui()
 	else:
 		if is_game_over == false:
 			game_board.log_event("Game Over!")

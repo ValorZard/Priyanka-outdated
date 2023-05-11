@@ -5,12 +5,13 @@ class_name CardButton
 @export var card_data : CardData
 
 var game_board : GameBoard
-
+var owner_unit : BaseUnit
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.connect("button_down", play_card)
 
-func setup(card_data : CardData, game_board : GameBoard):
+func setup(owner_unit : BaseUnit, card_data : CardData, game_board : GameBoard):
+	self.owner_unit = owner_unit
 	self.card_data = card_data
 	self.game_board = game_board
 	$CardName.text = card_data.card_name
@@ -24,3 +25,4 @@ func _process(delta):
 
 func play_card():
 	game_board.do_attack(card_data.attack_damage, card_data.action_point_cost)
+	# get rid of card and send it to the graveyard or whatever

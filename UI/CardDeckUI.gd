@@ -40,7 +40,7 @@ func update_deck_ui(current_unit : BaseUnit):
 	# now, add in add the cards for the unit
 	for card_data in current_unit.card_hand:
 		var card_button := card_button_prefab.instantiate()
-		card_button.setup(card_data, game_board)
+		card_button.setup(current_unit, card_data, game_board)
 		add_child(card_button)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
