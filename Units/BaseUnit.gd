@@ -17,6 +17,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 # Card stuff
 @export var card_deck : Array[CardData] # all the cards in the unit's deck
 @export var card_hand : Array[CardData] # the specific cards the unit current is "holding" in their hand
+var card_graveyard : Array[CardData] # where discarded cards go
 
 # base attack information
 @export var base_attack_damage : int = 1
@@ -111,6 +112,12 @@ func set_action_points(action_points : int):
 
 func refill_action_points():
 	action_points = max_action_points
+
+func get_rid_of_card(card : CardData):
+	# remove card from hand
+	card_hand.erase(card)
+	# put it in the graveyard
+	card_graveyard.push_back(card)
 
 func _physics_process(delta):
 	pass

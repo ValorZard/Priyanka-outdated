@@ -26,5 +26,5 @@ func _process(delta):
 func play_card():
 	if game_board.do_attack(card_data.attack_damage, card_data.action_point_cost):
 		# get rid of card and send it to the graveyard or whatever
-		owner_unit.card_hand.erase(card_data)
+		owner_unit.get_rid_of_card(card_data)
 		self.queue_free()
