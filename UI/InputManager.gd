@@ -7,13 +7,14 @@ class_name InputManager
 @export var camera3d : Camera3D
 @export var turn_timer : Timer 
 @export var input_buffer_timer : Timer
+@export var card_deck_ui : CardDeckUI
 
 var mouse_in_ui := false
 
 var is_game_over : bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$CardDeckUI.set_game_board(game_board)
+	card_deck_ui.set_game_board(game_board)
 	$AttackButton.connect("button_up", do_current_unit_base_attack)
 	$UndoButton.connect("button_up", game_board.undo_command)
 	$BackToMenuButton.connect("button_up", go_back_to_menu)
@@ -70,6 +71,7 @@ func do_current_unit_base_attack():
 
 func update_ui():
 	$StatsLabel.text = str("It's ",game_board.get_current_unit().name, " Turn! \nHP: ", game_board.get_current_unit().health, "\nAction Points: ", game_board.get_current_unit().action_points)
+	card_deck_ui.update_deck_ui(game_board.get_current_unit())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://y14fn6j2kqm3"]
+[gd_scene load_steps=15 format=3 uid="uid://y14fn6j2kqm3"]
 
 [ext_resource type="Script" path="res://GameBoard/GameBoard.gd" id="1_lty5j"]
 [ext_resource type="Script" path="res://UI/InputManager.gd" id="2_blcx6"]
@@ -8,7 +8,10 @@
 [ext_resource type="Script" path="res://GameBoard/Cursor.gd" id="5_64lmv"]
 [ext_resource type="PackedScene" uid="uid://qemowma3sf0r" path="res://UI/CardDeckUI.tscn" id="5_wefjj"]
 [ext_resource type="PackedScene" uid="uid://ouuora8lxpt7" path="res://Units/EnemyUnit.tscn" id="7_7icr8"]
+[ext_resource type="Resource" uid="uid://df1vh1gbvvymw" path="res://Cards/CardList/ShockwaveCard.tres" id="7_saaqn"]
+[ext_resource type="Resource" uid="uid://dn604xmeqh152" path="res://Cards/CardList/BlastBlowCard.tres" id="8_4tlpe"]
 [ext_resource type="Script" path="res://GameBoard/CombatManager.gd" id="8_quw6g"]
+[ext_resource type="Resource" uid="uid://tl4by1gv6g8" path="res://Cards/CardList/FlurryCard.tres" id="9_pog3m"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_4u0tp"]
 font_size = 20
@@ -27,7 +30,7 @@ current = true
 texture = ExtResource("5_7oytf")
 script = ExtResource("5_64lmv")
 
-[node name="InputManager" type="Control" parent="." node_paths=PackedStringArray("game_board", "cursor", "camera3d", "turn_timer", "input_buffer_timer")]
+[node name="InputManager" type="Control" parent="." node_paths=PackedStringArray("game_board", "cursor", "camera3d", "turn_timer", "input_buffer_timer", "card_deck_ui")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -40,6 +43,7 @@ cursor = NodePath("../Cursor")
 camera3d = NodePath("../Camera3D")
 turn_timer = NodePath("../TurnTimer")
 input_buffer_timer = NodePath("../InputBufferTimer")
+card_deck_ui = NodePath("CardDeckUI")
 
 [node name="AttackButton" type="Button" parent="InputManager"]
 layout_mode = 1
@@ -114,6 +118,7 @@ transform = Transform3D(0.965926, 0, 0.258819, -0.103606, 0.916384, 0.386661, -0
 
 [node name="PlayerUnit" parent="." instance=ExtResource("3_dmna3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -2)
+card_hand = Array[Resource("res://Cards/CardData.gd")]([ExtResource("7_saaqn"), ExtResource("8_4tlpe"), ExtResource("8_4tlpe"), ExtResource("9_pog3m")])
 
 [node name="Box" parent="." instance=ExtResource("4_t58ag")]
 transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, -20)
@@ -138,6 +143,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.05293, 0.5, -22.0237)
 
 [node name="PlayerUnit2" parent="." instance=ExtResource("3_dmna3")]
 transform = Transform3D(0.999109, 0.042207, 0, -0.042207, 0.999109, 0, 0, 0, 1, 6.60937, 2.30312, 0)
+card_hand = Array[Resource("res://Cards/CardData.gd")]([ExtResource("9_pog3m"), ExtResource("8_4tlpe"), ExtResource("7_saaqn")])
 
 [node name="EnemyUnit5" parent="." instance=ExtResource("7_7icr8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.64167, 0.5, -26.417)

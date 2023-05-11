@@ -14,6 +14,10 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @export var action_points : int = 3
 @export var max_action_points : int = 3
 
+# Card stuff
+@export var card_deck : Array[CardData] # all the cards in the unit's deck
+@export var card_hand : Array[CardData] # the specific cards the unit current is "holding" in their hand
+
 # base attack information
 @export var base_attack_damage : int = 1
 @export var base_attack_action_point_cost : int = 1
