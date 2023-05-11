@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cmy4ycwq53ul2" path="res://Prototyping/Box.tscn" id="4_t58ag"]
 [ext_resource type="Texture2D" uid="uid://dhjqljog8gjbn" path="res://icon.svg" id="5_7oytf"]
 [ext_resource type="Script" path="res://GameBoard/Cursor.gd" id="5_64lmv"]
-[ext_resource type="PackedScene" uid="uid://dsliayb2rhvp2" path="res://UI/CardDeck.tscn" id="5_ienob"]
+[ext_resource type="PackedScene" uid="uid://qemowma3sf0r" path="res://UI/CardDeckUI.tscn" id="5_wefjj"]
 [ext_resource type="PackedScene" uid="uid://ouuora8lxpt7" path="res://Units/EnemyUnit.tscn" id="7_7icr8"]
 [ext_resource type="Script" path="res://GameBoard/CombatManager.gd" id="8_quw6g"]
 
@@ -52,6 +52,20 @@ grow_vertical = 0
 text = "Attack
 "
 
+[node name="CardDeckUI" parent="InputManager" instance=ExtResource("5_wefjj")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -180.0
+offset_right = 200.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 0
+
 [node name="EventLabel" type="RichTextLabel" parent="InputManager"]
 layout_mode = 1
 anchors_preset = 5
@@ -75,20 +89,6 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Undo
 "
-
-[node name="CardDeck" parent="InputManager" instance=ExtResource("5_ienob")]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -225.0
-offset_top = -180.0
-offset_right = 225.0
-offset_bottom = 0.0
-grow_horizontal = 2
-grow_vertical = 0
 
 [node name="StatsLabel" type="Label" parent="InputManager"]
 layout_mode = 1

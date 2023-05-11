@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://burp6huvjo1ne"]
+
+[ext_resource type="Script" path="res://Units/BaseUnit.gd" id="1_08mea"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oqlsk"]
+height = 2.75
+
+[node name="BaseUnit" type="CharacterBody3D"]
+script = ExtResource("1_08mea")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_oqlsk")
+
+[node name="CharacterModel" type="CSGCylinder3D" parent="."]

@@ -13,7 +13,7 @@ var mouse_in_ui := false
 var is_game_over : bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$CardDeck.set_game_board(game_board)
+	$CardDeckUI.set_game_board(game_board)
 	$AttackButton.connect("button_up", do_current_unit_base_attack)
 	$UndoButton.connect("button_up", game_board.undo_command)
 	$BackToMenuButton.connect("button_up", go_back_to_menu)
@@ -48,7 +48,7 @@ func cursor_can_click() -> bool:
 # get value if we were actually able to get an input for movement or not
 func is_movement_selected() -> bool:
 	# only want to actually set the position we want the unit to move to on click
-	if Input.is_action_just_released("left_mouse_click") and cursor_can_click():
+	if Input.is_action_just_pressed("left_mouse_click") and cursor_can_click():
 		game_board.do_movement(cursor.direction_to_cursor, cursor.distance_to_cursor)
 		return true
 	return false
