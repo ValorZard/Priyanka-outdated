@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://qemowma3sf0r"]
+[gd_scene load_steps=2 format=3 uid="uid://qemowma3sf0r"]
 
 [ext_resource type="Script" path="res://UI/CardDeckUI.gd" id="1_wrc1e"]
-[ext_resource type="PackedScene" uid="uid://c3x3m37qiby8q" path="res://UI/CardButton.tscn" id="2_0gkg4"]
 
 [node name="CardDeckUI" type="HBoxContainer"]
 offset_top = 450.0
@@ -9,19 +8,3 @@ offset_right = 400.0
 offset_bottom = 630.0
 theme_override_constants/separation = 12
 script = ExtResource("1_wrc1e")
-
-[node name="CardButton" parent="." instance=ExtResource("2_0gkg4")]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="CardButton2" parent="." instance=ExtResource("2_0gkg4")]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="CardButton3" parent="." instance=ExtResource("2_0gkg4")]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="CardButton4" parent="." instance=ExtResource("2_0gkg4")]
-layout_mode = 2
-size_flags_horizontal = 3

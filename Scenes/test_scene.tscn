@@ -127,7 +127,7 @@ transform = Transform3D(0.965926, 0, 0.258819, -0.103606, 0.916384, 0.386661, -0
 
 [node name="PlayerUnit" parent="." instance=ExtResource("3_dmna3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -2)
-card_hand = Array[Resource("res://Cards/CardData.gd")]([ExtResource("7_saaqn"), ExtResource("8_4tlpe"), ExtResource("8_4tlpe"), ExtResource("9_pog3m")])
+card_deck = Array[Resource("res://Cards/CardData.gd")]([ExtResource("8_4tlpe"), ExtResource("8_4tlpe"), ExtResource("9_pog3m"), ExtResource("9_pog3m"), ExtResource("9_pog3m"), ExtResource("7_saaqn"), ExtResource("8_4tlpe"), ExtResource("8_4tlpe")])
 
 [node name="Box" parent="." instance=ExtResource("4_t58ag")]
 transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, -20)
@@ -152,7 +152,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.05293, 0.5, -22.0237)
 
 [node name="PlayerUnit2" parent="." instance=ExtResource("3_dmna3")]
 transform = Transform3D(0.999109, 0.042207, 0, -0.042207, 0.999109, 0, 0, 0, 1, 6.60937, 2.30312, 0)
-card_hand = Array[Resource("res://Cards/CardData.gd")]([ExtResource("9_pog3m"), ExtResource("8_4tlpe"), ExtResource("7_saaqn")])
+card_deck = Array[Resource("res://Cards/CardData.gd")]([ExtResource("7_saaqn"), ExtResource("7_saaqn"), ExtResource("9_pog3m"), ExtResource("9_pog3m"), ExtResource("9_pog3m"), ExtResource("9_pog3m"), ExtResource("8_4tlpe"), ExtResource("8_4tlpe")])
 
 [node name="EnemyUnit5" parent="." instance=ExtResource("7_7icr8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.64167, 0.5, -26.417)

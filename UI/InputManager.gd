@@ -20,14 +20,17 @@ func _ready():
 	$AttackButton.connect("button_up", do_current_unit_base_attack)
 	$UndoButton.connect("button_up", game_board.undo_command)
 	$BackToMenuButton.connect("button_up", go_back_to_menu)
-	#update_text_ui()
-	#update_deck_ui()
+	game_board.connect("game_board_setup_finished", setup_ui)
 
 func get_all_children(in_node,arr:=[]):
 	arr.push_back(in_node)
 	for child in in_node.get_children():
 		arr = get_all_children(child,arr)
 	return arr
+
+func setup_ui():
+	update_text_ui()
+	update_deck_ui()
 
 func bind_mouse_stuff_to_all_children():
 	for node in get_all_children(self):
@@ -111,11 +114,6 @@ func _process(delta):
 				update_deck_ui()
 				# restart timer now that the unit can't do anything more
 				turn_timer.start()
-		elif !input_buffer_timer.is_stopped():
-			# while the input buffer timer is still going, we can go ahead and update deck ui
-			# we can't do this on ready, since it relies on game board to be fully loaded in
-			# problem is, it ends up generating and discarding a bunch of card buttons before we can catch it, which is VERY annoying
-			update_deck_ui()
 	else:
 		if is_game_over == false:
 			game_board.log_event("Game Over!")

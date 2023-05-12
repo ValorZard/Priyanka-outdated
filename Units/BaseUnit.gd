@@ -19,6 +19,8 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @export var card_hand : Array[CardData] # the specific cards the unit current is "holding" in their hand
 var card_graveyard : Array[CardData] # where discarded cards go
 
+@export var max_amount_of_cards_in_hand := 4
+
 # base attack information
 @export var base_attack_damage : int = 1
 @export var base_attack_action_point_cost : int = 1
@@ -44,6 +46,13 @@ func _ready():
 func enable_unit():
 	# restore action points and other important things
 	refill_action_points()
+	# refill cards in card hand from deck 
+	# TODO: turn this into a command somehow so I can undo/redo
+	var amount_of_cards_to_refill := max_amount_of_cards_in_hand - card_hand.size()
+	for i in amount_of_cards_to_refill:
+		var card : CardData = card_deck.pop_back()
+		if card != null:
+			card_hand.push_back(card)
 	# enable unit specific ui
 	ui_circle.visible = true
 	render_ui_circle()

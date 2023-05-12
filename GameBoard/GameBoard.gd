@@ -17,6 +17,9 @@ var current_unit_index : float
 @onready var event_label : RichTextLabel = $InputManager/EventLabel
 var event_queue : Array[String]
 
+# signals
+signal game_board_setup_finished
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	current_unit_index = 0
@@ -26,6 +29,7 @@ func _ready():
 			units_in_initative_order.append(node)
 	#print(units_in_initative_order)
 	get_current_unit().enable_unit()
+	game_board_setup_finished.emit()
 
 # generate "line" between cursor and player for UI purposes
 # NOTE: Doesn't currently work properly, rotation is a bit jank
