@@ -28,7 +28,7 @@ func _ready():
 		if node is BaseUnit:
 			units_in_initative_order.append(node)
 	#print(units_in_initative_order)
-	get_current_unit().enable_unit()
+	enable_current_unit(true)
 	game_board_setup_finished.emit()
 
 # generate "line" between cursor and player for UI purposes
@@ -37,6 +37,30 @@ func _ready():
 #	$BoxLine.position = ($CharacterUnit.position + cursor_position) / 2
 #	$BoxLine.width = ($CharacterUnit.position - cursor_position).length()
 #	$BoxLine.rotation.y = $CharacterUnit.position.angle_to(cursor_position)
+
+# put this in game board since it just makes more sense, even though i have to refer to the current unit too much
+func enable_current_unit(first_time : bool = false):
+	# restore action points and other important things
+	get_current_unit().refill_action_points()
+	# refill cards in card hand from deck 
+	# TODO: turn this into a command somehow so I can undo/redo
+	var amount_of_cards_to_refill : int = get_current_unit().max_amount_of_cards_in_hand - get_current_unit().card_hand.size()
+	for i in amount_of_cards_to_refill:
+		var draw_card_cmd : DrawCardCommand = DrawCardCommand.new(self)
+		# if the command doesn't work, break the loop since that means there's no more cards avaliable to draw
+		if !draw_card_cmd.execute():
+			break
+		else:
+			# when we first spawn the unit in, we don't want to be able to undo the draw card actions since those are the starting cards
+			if !first_time:
+				self.command_array.push_back(draw_card_cmd)
+	# enable unit specific ui
+	get_current_unit().ui_circle.visible = true
+	get_current_unit().render_ui_circle()
+
+func disable_current_unit():
+	# disable unit specific ui
+	get_current_unit().ui_circle.visible = false
 
 func log_event(message : String):
 	event_queue.push_front(message)
@@ -47,6 +71,10 @@ func log_event(message : String):
 # logic functions
 func get_current_unit():
 	return units_in_initative_order[current_unit_index]
+
+#idk if this is a bad idea or not to do this, but we'll see!
+func add_command(command : Command):
+	command_array.push_back(command)
 
 func undo_command():
 	if !command_array.is_empty():
@@ -67,6 +95,9 @@ func do_movement(direction : Vector3, distance : float):
 	if movement_command.execute():
 		command_array.push_back(movement_command)
 
+func play_card():
+	pass
+
 func check_if_one_side_won() -> bool:
 	var number_of_player_units : int = 0
 	var number_of_enemy_units : int = 0
@@ -80,9 +111,10 @@ func check_if_one_side_won() -> bool:
 
 
 # once all of the unit's action points are used up, move on to next unit
+# TODO: Turnt hsi to a command so we can undo/redo
 func go_to_next_unit():
 	# clean up stuff with the current unit
-	get_current_unit().disable_unit()
+	disable_current_unit()
 	#go to next unit. if reached the end, go back to the start
 	current_unit_index += 1
 	if current_unit_index >= units_in_initative_order.size():
@@ -91,7 +123,7 @@ func go_to_next_unit():
 	if get_current_unit().is_dead() and !check_if_one_side_won():
 		go_to_next_unit()
 	# set up new unit
-	get_current_unit().enable_unit()
+	enable_current_unit()
 	#print("moving on to next unit : ", current_unit_index)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

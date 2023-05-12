@@ -18,9 +18,9 @@ func _ready():
 	card_deck_ui.set_game_board(game_board)
 	#print(game_board.get_current_unit())
 	$AttackButton.connect("button_up", do_current_unit_base_attack)
-	$UndoButton.connect("button_up", game_board.undo_command)
+	$UndoButton.connect("button_up", do_undo)
 	$BackToMenuButton.connect("button_up", go_back_to_menu)
-	game_board.connect("game_board_setup_finished", setup_ui)
+	game_board.connect("game_board_setup_finished", update_all_ui)
 
 func get_all_children(in_node,arr:=[]):
 	arr.push_back(in_node)
@@ -28,9 +28,13 @@ func get_all_children(in_node,arr:=[]):
 		arr = get_all_children(child,arr)
 	return arr
 
-func setup_ui():
+func update_all_ui():
 	update_text_ui()
 	update_deck_ui()
+
+func do_undo():
+	game_board.undo_command()
+	update_all_ui()
 
 func bind_mouse_stuff_to_all_children():
 	for node in get_all_children(self):

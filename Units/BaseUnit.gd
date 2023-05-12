@@ -42,25 +42,6 @@ func setup_unit():
 func _ready():
 	setup_unit()
 
-# if this unit is the current unit selected by the game board, set up UI
-func enable_unit():
-	# restore action points and other important things
-	refill_action_points()
-	# refill cards in card hand from deck 
-	# TODO: turn this into a command somehow so I can undo/redo
-	var amount_of_cards_to_refill := max_amount_of_cards_in_hand - card_hand.size()
-	for i in amount_of_cards_to_refill:
-		var card : CardData = card_deck.pop_back()
-		if card != null:
-			card_hand.push_back(card)
-	# enable unit specific ui
-	ui_circle.visible = true
-	render_ui_circle()
-
-func disable_unit():
-	# disable unit specific ui
-	ui_circle.visible = false
-
 # note for future self, should figure out how to change this either move_and_slide or move_and_collide
 # that way I can take advantage of Godot's in engine physics stuff and not run into any weird bugs
 func change_position(movement_direction : Vector3, movement_distance : float):

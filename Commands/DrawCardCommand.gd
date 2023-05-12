@@ -7,11 +7,17 @@ func _init(game_board : GameBoard):
 
 
 func execute() -> bool:
-	assert(initialized)
-	print("%s missing overwrite of the execute method" % name)
-	return false
+	var card : CardData = current_unit.card_deck.pop_back()
+	if card != null:
+		current_unit.card_hand.push_back(card)
+		return true
+	else:
+		return false
 
 func undo() -> bool:
-	assert(initialized)
-	print("%s missing overwrite of the undo method" % name)
-	return false
+	var card : CardData = current_unit.card_hand.pop_back()
+	if card != null:
+		current_unit.card_deck.push_back(card)
+		return true
+	else:
+		return false

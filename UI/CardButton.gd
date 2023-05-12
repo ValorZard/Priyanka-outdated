@@ -6,6 +6,9 @@ class_name CardButton
 
 var game_board : GameBoard
 var owner_unit : BaseUnit
+
+#signal card_played(card_data)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.connect("button_down", play_card)
