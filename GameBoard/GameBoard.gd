@@ -82,12 +82,12 @@ func undo_command():
 
 # make the current unit controlled by the game board attack
 func do_attack(damage_dealt : int, action_point_cost : int) -> bool:
-	if get_current_unit().can_attack():
-		var attack_command := AttackCommand.new(self, $EnemyUnit, damage_dealt, action_point_cost)
-		if attack_command.execute():
-			command_array.push_back(attack_command)
-			return true
-	return false
+	var attack_command := AttackCommand.new(self, $EnemyUnit, damage_dealt, action_point_cost)
+	if attack_command.execute():
+		command_array.push_back(attack_command)
+		return true
+	else:
+		return false
 
 # make the current unit controlled by the game board move
 func do_movement(direction : Vector3, distance : float):

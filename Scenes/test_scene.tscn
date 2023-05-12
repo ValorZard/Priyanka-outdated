@@ -21,6 +21,7 @@ albedo_color = Color(0.615686, 0.866667, 0, 1)
 
 [node name="GameBoard" type="Node3D"]
 script = ExtResource("1_lty5j")
+character_ui_circle_width = null
 
 [node name="TurnTimer" type="Timer" parent="."]
 wait_time = 0.25
