@@ -13,6 +13,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @export var max_movement_radius : float = 10 # maximum distance this unit can move in one turn in meters
 @export var action_points : int = 3
 @export var max_action_points : int = 3
+var first_time := true # check if this is the unit's first turn or not
 
 # Card stuff
 @export var card_deck : Array[CardData] # all the cards in the unit's deck
@@ -103,11 +104,12 @@ func set_action_points(action_points : int):
 func refill_action_points():
 	action_points = max_action_points
 
-func get_rid_of_card(card : CardData):
+func put_card_in_graveyard(card : CardData):
 	# remove card from hand
 	card_hand.erase(card)
 	# put it in the graveyard
 	card_graveyard.push_back(card)
+
 
 func _physics_process(delta):
 	pass

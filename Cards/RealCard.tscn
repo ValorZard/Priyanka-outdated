@@ -1,8 +1,23 @@
 [gd_scene load_steps=3 format=3 uid="uid://ban7iman6kcce"]
 
 [ext_resource type="Texture2D" uid="uid://cj08alkgohkss" path="res://Cards/Yugioh_Card_Back.jpg" id="1_mlvkj"]
-[ext_resource type="Script" path="res://Cards/Card.gd" id="2_kk7u4"]
+
+[sub_resource type="GDScript" id="GDScript_3cinw"]
+script/source = "extends Sprite3D
+
+class_name Card
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
 
 [node name="Card" type="Sprite3D"]
 texture = ExtResource("1_mlvkj")
-script = ExtResource("2_kk7u4")
+script = SubResource("GDScript_3cinw")

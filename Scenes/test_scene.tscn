@@ -21,7 +21,6 @@ albedo_color = Color(0.615686, 0.866667, 0, 1)
 
 [node name="GameBoard" type="Node3D"]
 script = ExtResource("1_lty5j")
-character_ui_circle_width = null
 
 [node name="TurnTimer" type="Timer" parent="."]
 wait_time = 0.25
@@ -137,7 +136,7 @@ transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, -20)
 material = SubResource("StandardMaterial3D_pp4sk")
 
 [node name="EnemyUnit" parent="." instance=ExtResource("7_7icr8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4435, 0.5, -14.7083)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.51745, 0.5, -6.58823)
 
 [node name="CombatManager" type="Node" parent="."]
 script = ExtResource("8_quw6g")
@@ -149,7 +148,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.4451, 0.5, -28.6717)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.23204, 0.5, -37.2569)
 
 [node name="EnemyUnit4" parent="." instance=ExtResource("7_7icr8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.05293, 0.5, -22.0237)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.05293, 0.5, -8.84615)
 
 [node name="PlayerUnit2" parent="." instance=ExtResource("3_dmna3")]
 transform = Transform3D(0.999109, 0.042207, 0, -0.042207, 0.999109, 0, 0, 0, 1, 6.60937, 2.30312, 0)

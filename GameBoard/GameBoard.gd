@@ -28,18 +28,11 @@ func _ready():
 		if node is BaseUnit:
 			units_in_initative_order.append(node)
 	#print(units_in_initative_order)
-	enable_current_unit(true)
+	enable_current_unit()
 	game_board_setup_finished.emit()
 
-# generate "line" between cursor and player for UI purposes
-# NOTE: Doesn't currently work properly, rotation is a bit jank
-#func render_placement_line(cursor_position : Vector3):
-#	$BoxLine.position = ($CharacterUnit.position + cursor_position) / 2
-#	$BoxLine.width = ($CharacterUnit.position - cursor_position).length()
-#	$BoxLine.rotation.y = $CharacterUnit.position.angle_to(cursor_position)
-
 # put this in game board since it just makes more sense, even though i have to refer to the current unit too much
-func enable_current_unit(first_time : bool = false):
+func enable_current_unit():
 	# restore action points and other important things
 	get_current_unit().refill_action_points()
 	# refill cards in card hand from deck 
@@ -52,11 +45,13 @@ func enable_current_unit(first_time : bool = false):
 			break
 		else:
 			# when we first spawn the unit in, we don't want to be able to undo the draw card actions since those are the starting cards
-			if !first_time:
+			if !get_current_unit().first_time:
 				self.command_array.push_back(draw_card_cmd)
 	# enable unit specific ui
 	get_current_unit().ui_circle.visible = true
 	get_current_unit().render_ui_circle()
+	# if this was the unit's first turn, make sure to note that
+	get_current_unit().first_time = false
 
 func disable_current_unit():
 	# disable unit specific ui
@@ -82,7 +77,7 @@ func undo_command():
 
 # make the current unit controlled by the game board attack
 func do_attack(damage_dealt : int, action_point_cost : int) -> bool:
-	var attack_command := AttackCommand.new(self, $EnemyUnit, damage_dealt, action_point_cost)
+	var attack_command := AttackCommand.new(self, damage_dealt, action_point_cost)
 	if attack_command.execute():
 		command_array.push_back(attack_command)
 		return true

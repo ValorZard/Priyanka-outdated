@@ -27,7 +27,6 @@ func _process(delta):
 	pass
 
 func play_card():
-	if game_board.do_attack(card_data.attack_damage, card_data.action_point_cost):
-		# get rid of card and send it to the graveyard or whatever
-		owner_unit.get_rid_of_card(card_data)
-		self.queue_free()
+	var play_card_cmd : PlayCardCommand = PlayCardCommand.new(game_board, card_data, self)
+	if play_card_cmd.execute():
+		game_board.add_command(play_card_cmd)

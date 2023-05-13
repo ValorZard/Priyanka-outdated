@@ -6,9 +6,9 @@ var target : BaseUnit  #unit being attacked
 var damage_dealt : int 
 var action_point_cost : int
 
-func _init(game_board : GameBoard, target: BaseUnit, damage_dealt : int, action_point_cost : int):
+func _init(game_board : GameBoard, damage_dealt : int, action_point_cost : int):
 	initialize(game_board)
-	self.target = target
+	#self.target = target
 	self.damage_dealt = damage_dealt
 	self.action_point_cost = action_point_cost
 
