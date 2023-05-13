@@ -9,9 +9,9 @@ class_name GameBoard
 var mouse_button_clicked : bool = false
 # actual data
 #var move_to_position : Vector3 = Vector3.ZERO
-var command_array : Array
-var units_in_initative_order : Array[BaseUnit]
-var current_unit_index : float
+@export var command_array : Array
+@export var units_in_initative_order : Array[BaseUnit]
+@export var current_unit_index : float
 # visual data
 @export var character_ui_circle_width : float = 1
 @onready var event_label : RichTextLabel = $InputManager/EventLabel
@@ -54,6 +54,7 @@ func enable_current_unit():
 	get_current_unit().first_time = false
 
 func disable_current_unit():
+	get_current_unit().empty_action_points()
 	# disable unit specific ui
 	get_current_unit().ui_circle.visible = false
 
@@ -108,18 +109,9 @@ func check_if_one_side_won() -> bool:
 # once all of the unit's action points are used up, move on to next unit
 # TODO: Turnt hsi to a command so we can undo/redo
 func go_to_next_unit():
-	# clean up stuff with the current unit
-	disable_current_unit()
-	#go to next unit. if reached the end, go back to the start
-	current_unit_index += 1
-	if current_unit_index >= units_in_initative_order.size():
-		current_unit_index = 0
-	# if the new unit we're on is dead, move on to the next one
-	if get_current_unit().is_dead() and !check_if_one_side_won():
-		go_to_next_unit()
-	# set up new unit
-	enable_current_unit()
-	#print("moving on to next unit : ", current_unit_index)
+	var command := GoToNextUnitCommand.new(self)
+	if command.execute():
+		command_array.push_back(command)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):

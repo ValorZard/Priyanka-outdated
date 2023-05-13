@@ -75,7 +75,7 @@ func do_current_unit_actions():
 		#print("on unit: ", game_board.get_current_unit().name)
 		# TODO: Actiually have an AI here
 		game_board.do_attack(game_board.get_current_unit().base_attack_damage, game_board.get_current_unit().base_attack_action_point_cost)
-		game_board.get_current_unit().set_action_points(0)
+		game_board.get_current_unit().empty_action_points()
 
 # called when the attack button is pressed, does the unit's base attack (different from Card attacks)
 func do_current_unit_base_attack():

@@ -104,6 +104,9 @@ func set_action_points(action_points : int):
 func refill_action_points():
 	action_points = max_action_points
 
+func empty_action_points():
+	action_points = 0
+
 func put_card_in_graveyard(card : CardData):
 	# remove card from hand
 	card_hand.erase(card)
