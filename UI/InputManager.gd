@@ -21,6 +21,7 @@ func _ready():
 	$UndoButton.connect("button_up", do_undo)
 	$BackToMenuButton.connect("button_up", go_back_to_menu)
 	game_board.connect("game_board_setup_finished", update_all_ui)
+	$GoToNextUnitButton.connect("button_up", go_to_next_unit)
 
 func get_all_children(in_node,arr:=[]):
 	arr.push_back(in_node)
@@ -66,16 +67,15 @@ func is_movement_selected() -> bool:
 		return true
 	return false
 
-func do_current_unit_actions():
+func get_player_inputs():
 	if game_board.get_current_unit() is PlayerUnit:
 		# do not move on unless the player actually does an input for the player unit
 		is_movement_selected()
 		pass
 	else:
 		#print("on unit: ", game_board.get_current_unit().name)
-		# TODO: Actiually have an AI here
-		game_board.do_attack(game_board.get_current_unit().base_attack_damage, game_board.get_current_unit().base_attack_action_point_cost)
-		game_board.get_current_unit().empty_action_points()
+		pass
+
 
 # called when the attack button is pressed, does the unit's base attack (different from Card attacks)
 func do_current_unit_base_attack():
@@ -100,26 +100,27 @@ func _input(event):
 #		pass
 	pass
 
+func go_to_next_unit():
+	# move onto the next unit if conditions are met
+	if game_board.go_to_next_unit():
+		# make sure to change the deck to the one the next unit has
+		update_deck_ui()
+		# restart timer now that the unit can't do anything more
+		turn_timer.start()
+		if game_board.get_current_unit() is EnemyUnit:
+			# TODO: Actiually have an AI here
+			game_board.do_attack(game_board.get_current_unit().base_attack_damage, game_board.get_current_unit().base_attack_action_point_cost)
+			game_board.get_current_unit().empty_action_points()
+	else:
+		# if we can't go to the next unit anymore, that means the game is over
+		if is_game_over == false:
+			game_board.log_event("Game Over!")
+			is_game_over = true
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# since this is visual, we want to update cursor as fast as possible
 	cursor.update_cursor(camera3d, game_board.get_current_unit())
 	# only care about doing the game loop if a side hasn't won yet
-	if !game_board.check_if_one_side_won():
-		# once a unit has finished its turn, the next once can go
-		# also make sure inputs from the previous scene don't accidentally carry over here
-		if turn_timer.is_stopped() and input_buffer_timer.is_stopped():
-			do_current_unit_actions()
-			update_text_ui()
-			# check if current unit is out of action points. If so, move on to the next unit
-			if game_board.get_current_unit().action_points <= 0:
-				game_board.go_to_next_unit()
-				# make sure to change the deck to the one the next unit has
-				update_deck_ui()
-				# restart timer now that the unit can't do anything more
-				turn_timer.start()
-	else:
-		if is_game_over == false:
-			game_board.log_event("Game Over!")
-			is_game_over = true
-		pass
+	get_player_inputs()
+	update_text_ui()

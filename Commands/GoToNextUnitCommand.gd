@@ -13,6 +13,7 @@ func execute() -> bool:
 	game_board.current_unit_index += 1
 	if game_board.current_unit_index >= game_board.units_in_initative_order.size():
 		game_board.current_unit_index = 0
+	game_board.log_event(str("moving on to next unit : ", game_board.current_unit_index))
 	# if the new unit we're on is dead, move on to the next one
 	if game_board.get_current_unit().is_dead() and !game_board.check_if_one_side_won():
 		execute()
@@ -21,7 +22,6 @@ func execute() -> bool:
 		return false
 	# set up new unit
 	game_board.enable_current_unit()
-	game_board.log_event(str("moving on to next unit : ", game_board.current_unit_index))
 	return true
 
 func undo() -> bool:
@@ -32,11 +32,11 @@ func undo() -> bool:
 	game_board.current_unit_index -= 1
 	if game_board.current_unit_index < 0:
 		game_board.current_unit_index = game_board.units_in_initative_order.size() - 1
+	game_board.log_event(str("moving on to previous unit : ", game_board.current_unit_index))
 	# if the new unit we're on is dead, move on to the next one
 	# we're assuming that at least one unit must still be alive
 	if game_board.get_current_unit().is_dead():
 		undo()
 	# set up new unit
 	game_board.enable_current_unit()
-	game_board.log_event(str("moving on to previous unit : ", game_board.current_unit_index))
 	return true

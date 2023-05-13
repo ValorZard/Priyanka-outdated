@@ -108,10 +108,13 @@ func check_if_one_side_won() -> bool:
 
 # once all of the unit's action points are used up, move on to next unit
 # TODO: Turnt hsi to a command so we can undo/redo
-func go_to_next_unit():
+func go_to_next_unit() -> bool:
 	var command := GoToNextUnitCommand.new(self)
 	if command.execute():
 		command_array.push_back(command)
+		return true
+	else:
+		return false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
