@@ -12,6 +12,7 @@ var mouse_button_clicked : bool = false
 @export var command_array : Array
 @export var units_in_initative_order : Array[BaseUnit]
 @export var current_unit_index : float
+@export var round : int = 0
 # visual data
 @export var character_ui_circle_width : float = 1
 @onready var event_label : RichTextLabel = $InputManager/EventLabel

@@ -82,7 +82,7 @@ func do_current_unit_base_attack():
 	game_board.do_attack(game_board.get_current_unit().base_attack_damage, game_board.get_current_unit().base_attack_action_point_cost)
 
 func update_text_ui():
-	$StatsLabel.text = str("It's ",game_board.get_current_unit().name, " Turn! \nHP: ", game_board.get_current_unit().health, "\nAction Points: ", game_board.get_current_unit().action_points)
+	$StatsLabel.text = str("It's ",game_board.get_current_unit().name, " Turn! \nHP: ", game_board.get_current_unit().health, "\nAction Points: ", game_board.get_current_unit().action_points, "\nCurrent Round: ", game_board.round)
 
 func update_deck_ui():
 	card_deck_ui.update_deck_ui(game_board.get_current_unit())
