@@ -24,3 +24,15 @@ func _init(card_name := "", card_type := CardType.ATTACK, action_point_cost := 0
 	self.attacks_per_unit = attacks_per_unit
 	self.number_of_units_affected_by_card = number_of_units_affected_by_card
 	self.description = description
+
+func _to_string():
+	var return_string := str("[Card Name: ", card_name, ", Type: ")
+	match card_type:
+		CardType.ATTACK:
+			return_string += "Attack, "
+		CardType.ABILITY:
+			return_string += "Ability, "
+	return_string += str("Action Point Cost: ", action_point_cost, ", Damage per Attack: ", 
+		damage_per_attack, ", Attacks per Unit: ", attacks_per_unit, ", Number of Units Affected by Card: ", number_of_units_affected_by_card,
+		", Description: ", description)
+	return return_string

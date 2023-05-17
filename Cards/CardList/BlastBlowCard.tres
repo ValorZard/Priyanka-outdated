@@ -9,5 +9,5 @@ card_type = 0
 action_point_cost = 2
 damage_per_attack = 6
 attacks_per_unit = 1
-number_of_units_affected_by_card = 0
+number_of_units_affected_by_card = 1
 description = "After hitting, push the target 3 squares, then Priyanka may move up to 3 squares to a space adjacent to them."

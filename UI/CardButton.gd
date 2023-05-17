@@ -27,6 +27,7 @@ func _process(delta):
 	pass
 
 func play_card():
+	print(card_data)
 	var play_card_cmd : PlayCardCommand = PlayCardCommand.new(game_board, card_data, self)
 	if play_card_cmd.execute():
 		game_board.add_command(play_card_cmd)

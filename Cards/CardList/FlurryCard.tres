@@ -9,5 +9,5 @@ card_type = 0
 action_point_cost = 3
 damage_per_attack = 2
 attacks_per_unit = 4
-number_of_units_affected_by_card = 0
+number_of_units_affected_by_card = 1
 description = "Make 4 of these attacks against the same target."

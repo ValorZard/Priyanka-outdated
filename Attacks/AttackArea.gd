@@ -22,28 +22,27 @@ func on_body_exited(body):
 	array_of_possible_units_to_attack.remove_at(array_of_possible_units_to_attack.find(body))
 	#print(array_of_possible_units_to_attack.size())
 
-# THIS FUNCTION WILL BREAK IF THERES NOTHING IN THE ARRAY
-# I have no idea how to solve this problem
-# gets the neartest target unit for the owner unit
-func get_nearest_unit() -> BaseUnit:
+func sort_closest(unit1 : BaseUnit, unit2 : BaseUnit):
+	if (unit1.global_position - owner_unit.global_position).length() < (unit2.global_position - owner_unit.global_position).length():
+		return true
+	return false
+
+# get nearest units in array that aren't dead and are on the same team
+func get_nearest_units() -> Array[BaseUnit]:
 	# check if this array is empty, or else the program will crash
 	assert(!array_of_possible_units_to_attack.is_empty())
-	#print(array_of_possible_units_to_attack)
-	# set it to an impossible large number, might change later
-	var closest_distance_between_target_and_owner : float = 9223372036854775807
-	var closest_target_unit : BaseUnit
+	# remove all the units in the array that don't matter
 	for unit in array_of_possible_units_to_attack:
-		if (unit.global_position - owner_unit.global_position).length() < closest_distance_between_target_and_owner:
-			# probably don't want to keep killing an enemy thats already dead
-			if !unit.is_dead():
-				# only get unit that is on the other side.
-				if (owner_unit.is_in_group("enemy") and unit.is_in_group("player")) or (owner_unit.is_in_group("player") and unit.is_in_group("enemy")):
-					closest_target_unit = unit
-					closest_distance_between_target_and_owner = (closest_target_unit.global_position - owner_unit.global_position).length()
-			else:
-				#print("this unit is dead, don't use, ", unit)
-				pass
-	return closest_target_unit
+		# remove dead units
+		if unit.is_dead():
+			array_of_possible_units_to_attack.erase(unit)
+		# remove units on the same team
+		if (owner_unit.is_in_group("enemy") and unit.is_in_group("enemy")) or (owner_unit.is_in_group("player") and unit.is_in_group("player")):
+			array_of_possible_units_to_attack.erase(unit)
+	#print(array_of_possible_units_to_attack)
+	array_of_possible_units_to_attack.sort_custom(sort_closest)
+	#print(array_of_possible_units_to_attack)
+	return array_of_possible_units_to_attack
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
