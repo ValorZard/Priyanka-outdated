@@ -5,6 +5,9 @@
 [resource]
 script = ExtResource("1_u5n0b")
 card_name = "Blast Blow"
+card_type = 0
 action_point_cost = 2
-attack_damage = 6
+damage_per_attack = 6
+attacks_per_unit = 1
+number_of_units_affected_by_card = 0
 description = "After hitting, push the target 3 squares, then Priyanka may move up to 3 squares to a space adjacent to them."

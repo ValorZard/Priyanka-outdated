@@ -5,6 +5,9 @@
 [resource]
 script = ExtResource("1_y8r8c")
 card_name = "Flurry"
+card_type = 0
 action_point_cost = 3
-attack_damage = 2
+damage_per_attack = 2
+attacks_per_unit = 4
+number_of_units_affected_by_card = 0
 description = "Make 4 of these attacks against the same target."

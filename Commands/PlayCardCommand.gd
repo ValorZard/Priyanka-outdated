@@ -13,7 +13,7 @@ func _init(game_board : GameBoard, card_data : CardData, card_button : CardButto
 
 
 func execute() -> bool:
-	self.attack_command = AttackCommand.new(game_board, card_data.attack_damage, card_data.action_point_cost)
+	self.attack_command = AttackCommand.new(game_board, card_data.damage_per_attack, card_data.action_point_cost)
 	if attack_command.execute():
 		# get rid of card and send it to the graveyard or whatever
 		current_unit.put_card_in_graveyard(card_data)

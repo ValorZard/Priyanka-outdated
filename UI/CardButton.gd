@@ -18,7 +18,7 @@ func setup(owner_unit : BaseUnit, card_data : CardData, game_board : GameBoard):
 	self.card_data = card_data
 	self.game_board = game_board
 	$CardName.text = card_data.card_name
-	$CardStats.text = str("AP: ", card_data.action_point_cost, " DMG: ", card_data.attack_damage)
+	$CardStats.text = str("AP: ", card_data.action_point_cost, " DMG: ", card_data.damage_per_attack)
 	$CardDescription.text = card_data.description
 
 

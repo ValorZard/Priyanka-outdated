@@ -5,6 +5,9 @@
 [resource]
 script = ExtResource("1_56gja")
 card_name = "Shockwave"
+card_type = 0
 action_point_cost = 2
-attack_damage = 2
+damage_per_attack = 2
+attacks_per_unit = 1
+number_of_units_affected_by_card = 3
 description = "Make this attack against 3 different targets within range."
