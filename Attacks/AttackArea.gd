@@ -39,9 +39,7 @@ func get_nearest_units() -> Array[BaseUnit]:
 		# remove units on the same team
 		if (owner_unit.is_in_group("enemy") and unit.is_in_group("enemy")) or (owner_unit.is_in_group("player") and unit.is_in_group("player")):
 			array_of_possible_units_to_attack.erase(unit)
-	#print(array_of_possible_units_to_attack)
 	array_of_possible_units_to_attack.sort_custom(sort_closest)
-	#print(array_of_possible_units_to_attack)
 	return array_of_possible_units_to_attack
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

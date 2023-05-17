@@ -24,21 +24,16 @@ func execute():
 			# only get target if there are any units near by
 			if current_unit.attack_area.get_nearest_units().size() > 0:
 				targets = current_unit.attack_area.get_nearest_units().slice(0, number_of_units_attacked)
-			print(targets)
 			# don't attack an enemy thats already dead
 			if targets.size() > 0:
 				current_unit.set_action_points(current_unit.get_action_points()-action_point_cost)
-				print(current_unit.action_points)
 				for target in targets:
 					# do all the multihits per target
 					for i in range(0, attacks_per_unit):
 						target.take_damage(damage_dealt)
 						game_board.log_event(str("execute! ", current_unit.name, " to ", target.name, " damage_dealt: ", damage_dealt, ", target health now: ", target.health))
 				return true
-		else:
-			return false
-	else: 
-		return false
+	return false
 
 func undo():
 	current_unit.set_action_points(current_unit.get_action_points() + action_point_cost)
